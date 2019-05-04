@@ -3,6 +3,7 @@ package com.depromeet.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -57,7 +58,7 @@ public class LoginActivity extends AppCompatActivity implements VolleyResponseLi
     }
 
     private void showProgress() {
-        mLoginProgress.setVisibility(View.INVISIBLE);
+        mLoginProgress.setVisibility(View.VISIBLE);
     }
 
     private void hideProgress() {
@@ -110,6 +111,7 @@ public class LoginActivity extends AppCompatActivity implements VolleyResponseLi
     public void onError(VolleyError error) {
         Toast.makeText(this, R.string.all_err, Toast.LENGTH_SHORT).show();
 
+        Log.d("err", error.toString());
         hideProgress();
     }
 }
