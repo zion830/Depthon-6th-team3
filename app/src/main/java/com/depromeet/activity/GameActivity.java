@@ -2,6 +2,7 @@ package com.depromeet.activity;
 
 import android.os.CountDownTimer;
 import android.os.Handler;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -25,7 +26,7 @@ public class GameActivity extends AppCompatActivity {
     EditText mQuizFirstAnswerEdit;
     EditText mQuizSecondAnswerEdit;
     EditText mQuizThirdAnswerEdit;
-    Button mSubmitBtn;
+    FloatingActionButton mSubmitBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,14 +47,14 @@ public class GameActivity extends AppCompatActivity {
         mSubmitBtn = findViewById(R.id.fb_game_submit);
 
         // 입력된 단어, 입력 안된 단어 색상변경
-        if ( mQuizFirstAnswerEdit.getText().toString().length() == 0) {
+        if (mQuizFirstAnswerEdit.getText().toString().length() == 0) {
             mQuizFirstWordText.setBackground(ContextCompat.getDrawable(GameActivity.this, R.drawable.vacant_word_icon));
         } else {
             mQuizFirstWordText.setBackground(ContextCompat.getDrawable(GameActivity.this, R.drawable.word_icon));
         }
 
         // 5초 카운터
-        new CountDownTimer(5000,1000) {
+        new CountDownTimer(5000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {  //1초마다 변하는 이벤트
                 mStartTimerText.setText(Integer.toString(--mStartTime));
@@ -66,7 +67,6 @@ public class GameActivity extends AppCompatActivity {
                 mQuizFirstWordText.setText(Character.toString(mStartTimerText.getText().charAt(0)));
                 mQuizSecondWordText.setText(Character.toString(mStartTimerText.getText().charAt(1)));
                 mQuizThirdWordText.setText(Character.toString(mStartTimerText.getText().charAt(2)));
-
 
 
                 // 5초 지난 후, 단어 등장과 함께 1분 카운트 시작
@@ -99,7 +99,6 @@ public class GameActivity extends AppCompatActivity {
 
             }
         });
-
 
 
     }

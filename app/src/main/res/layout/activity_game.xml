@@ -34,11 +34,11 @@
                     android:id="@+id/tv_game_timer"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:textColor="#ffffff"
                     android:letterSpacing="-0.03"
                     android:lineSpacingExtra="10sp"
-                    android:text="60" />
+                    android:text="60"
+                    android:textColor="#ffffff"
+                    android:textSize="16sp" />
 
             </LinearLayout>
 
@@ -47,12 +47,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="96dp"
                 android:gravity="center"
-                android:text="디프만"
-                android:textSize="33sp"
-                android:textColor="#ffffff"
                 android:letterSpacing="-0.03"
                 android:lineSpacingExtra="22sp"
-                tools:text="디 프 만"/>
+                android:text="디프만"
+                android:textColor="#ffffff"
+                android:textSize="33sp"
+                tools:text="디 프 만" />
 
 
         </LinearLayout>
@@ -175,7 +175,7 @@
                 android:layout_gravity="bottom|end">
 
                 <android.support.design.widget.FloatingActionButton
-                    android:id="@+id/fb_main_start"
+                    android:id="@+id/fb_game_submit"
                     android:layout_width="70dp"
                     android:layout_height="70dp"
                     android:layout_gravity="center"
@@ -187,7 +187,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:elevation="16dp"
-                    android:text="@string/main_start"
+                    android:text="@string/game_submit"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textColor="@android:color/white"
                     android:textSize="14sp" />
