@@ -4,12 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:background="#8Cffffff">
+    android:background="#99ffffff">
 
     <ImageView
-        android:id="@+id/img_game_tryagain"
-        android:layout_width="300dp"
+        android:id="@+id/img_game_fail"
+        android:padding="30dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/try_img" />
+        android:background="#a0000000"
+        android:src="@drawable/img_fail" />
 
 </LinearLayout>

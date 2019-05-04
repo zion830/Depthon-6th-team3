@@ -11,11 +11,22 @@
         android:orientation="vertical">
 
 
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="258dp"
-            android:background="@drawable/quiz_bg"
+            android:background="@drawable/back_quiz_main"
             android:orientation="vertical">
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -28,17 +39,17 @@
                     android:layout_height="25dp"
                     android:layout_gravity="center"
                     android:layout_marginRight="5dp"
-                    android:src="@drawable/icon_time" />
+                    android:src="@drawable/ic_timer_clock" />
 
                 <TextView
                     android:id="@+id/tv_game_timer"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textColor="#ffffff"
                     android:letterSpacing="-0.03"
                     android:lineSpacingExtra="10sp"
-                    android:text="60"
-                    android:textColor="#ffffff"
-                    android:textSize="16sp" />
+                    android:text="60" />
 
             </LinearLayout>
 
@@ -47,12 +58,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="96dp"
                 android:gravity="center"
+                android:text="디프만"
+                android:textSize="33sp"
+                android:textColor="#ffffff"
                 android:letterSpacing="-0.03"
                 android:lineSpacingExtra="22sp"
-                android:text="디프만"
-                android:textColor="#ffffff"
-                android:textSize="33sp"
-                tools:text="디 프 만" />
+                tools:text="디 프 만"/>
 
 
         </LinearLayout>
@@ -76,7 +87,7 @@
                     android:id="@+id/tv_game_firstword"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/word_icon"
+                    android:background="@drawable/ic_word"
                     android:gravity="center"
                     android:letterSpacing="-0.03"
                     android:lineSpacingExtra="27sp"
@@ -88,7 +99,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:background="@drawable/ev_answer_insert"
+                    android:background="@drawable/back_insert_text"
                     android:hint="입력!"
                     android:letterSpacing="-0.02"
                     android:lineSpacingExtra="3sp"
@@ -112,7 +123,7 @@
                     android:id="@+id/tv_game_secondword"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/word_icon"
+                    android:background="@drawable/ic_word"
                     android:gravity="center"
                     android:letterSpacing="-0.03"
                     android:lineSpacingExtra="27sp"
@@ -124,7 +135,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:background="@drawable/ev_answer_insert"
+                    android:background="@drawable/back_insert_text"
                     android:hint="입력!"
                     android:letterSpacing="-0.02"
                     android:lineSpacingExtra="3sp"
@@ -147,7 +158,7 @@
                     android:id="@+id/tv_game_thirdword"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/word_icon"
+                    android:background="@drawable/ic_word"
                     android:gravity="center"
                     android:letterSpacing="-0.03"
                     android:lineSpacingExtra="27sp"
@@ -159,7 +170,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:background="@drawable/ev_answer_insert"
+                    android:background="@drawable/back_insert_text"
                     android:hint="입력!"
                     android:letterSpacing="-0.02"
                     android:lineSpacingExtra="3sp"
@@ -168,6 +179,8 @@
                     android:textSize="14sp" />
 
             </LinearLayout>
+
+        </LinearLayout>
 
             <FrameLayout
                 android:layout_width="wrap_content"
@@ -187,14 +200,18 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:elevation="16dp"
-                    android:text="@string/game_submit"
+                    android:text="제출하자"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textColor="@android:color/white"
                     android:textSize="14sp" />
             </FrameLayout>
 
         </LinearLayout>
+
+        </ScrollView>
+
     </LinearLayout>
+
 </FrameLayout>
 
 

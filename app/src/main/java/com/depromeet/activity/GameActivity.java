@@ -1,5 +1,7 @@
 package com.depromeet.activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
@@ -7,15 +9,14 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.depromeet.R;
+import com.depromeet.util.FailDialog;
+import com.depromeet.util.PassDialog;
 
 public class GameActivity extends AppCompatActivity {
-    private Handler mHandler;
-    private Runnable mRunnable;
     private int mStartTime = 5;
     private int mQuizTime = 60;
     TextView mStartTimerText;
@@ -48,15 +49,19 @@ public class GameActivity extends AppCompatActivity {
 
         // 입력된 단어, 입력 안된 단어 색상변경
         if (mQuizFirstAnswerEdit.getText().toString().length() == 0) {
-            mQuizFirstWordText.setBackground(ContextCompat.getDrawable(GameActivity.this, R.drawable.vacant_word_icon));
+            mQuizFirstWordText.setBackground(ContextCompat.getDrawable(GameActivity.this, R.drawable.ic_word_vacant));
         } else {
-            mQuizFirstWordText.setBackground(ContextCompat.getDrawable(GameActivity.this, R.drawable.word_icon));
+            mQuizFirstWordText.setBackground(ContextCompat.getDrawable(GameActivity.this, R.drawable.ic_word));
         }
 
         // 5초 카운터
         new CountDownTimer(5000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {  //1초마다 변하는 이벤트
+                mQuizFirstAnswerEdit.setEnabled(false);
+                mQuizSecondAnswerEdit.setEnabled(false);
+                mQuizThirdAnswerEdit.setEnabled(false);
+
                 mStartTimerText.setText(Integer.toString(--mStartTime));
             }
 
@@ -68,9 +73,12 @@ public class GameActivity extends AppCompatActivity {
                 mQuizSecondWordText.setText(Character.toString(mStartTimerText.getText().charAt(1)));
                 mQuizThirdWordText.setText(Character.toString(mStartTimerText.getText().charAt(2)));
 
+                mQuizFirstAnswerEdit.setEnabled(true);
+                mQuizSecondAnswerEdit.setEnabled(true);
+                mQuizThirdWordText.setEnabled(true);
 
                 // 5초 지난 후, 단어 등장과 함께 1분 카운트 시작
-                new CountDownTimer(60000, 1000) {
+                new CountDownTimer(3000, 1000) {
                     @Override
                     public void onTick(long millisUntilFinished) {
                         mQuizTimerText.setText(Integer.toString(--mQuizTime));
@@ -79,7 +87,17 @@ public class GameActivity extends AppCompatActivity {
                     @Override
                     public void onFinish() { //타이머 종료시 이벤트
                         // "노력해요" 팝업창
+                        final FailDialog dialog = new FailDialog(GameActivity.this);
+                        dialog.show();
+                        // 2초후 메인화면 으로!
+                        Handler handler = new Handler();
+                        handler.postDelayed(new Runnable() {
+                            public void run() {
+                                dialog.dismiss();
+                                startActivity(new Intent(getApplicationContext(), MainActivity.class));
 
+                            }
+                        }, 2000);
                     }
                 }.start();
             }
@@ -89,17 +107,30 @@ public class GameActivity extends AppCompatActivity {
         mSubmitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // 참!잘했어요 팝업창
+                if ((mQuizFirstAnswerEdit.getText().toString().length() != 0) &&
+                        (mQuizSecondAnswerEdit.getText().toString().length() != 0) &&
+                        (mQuizThirdAnswerEdit.getText().toString().length() != 0)) {
+                    // 참!잘했어요 팝업창
+                    final PassDialog dialog = new PassDialog(GameActivity.this);
+                    dialog.show();
 
-                // 데이터 저장
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        public void run() {
+                            dialog.dismiss();
+                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+
+                        }
+                    }, 2000);
+
+                    // 데이터 저장
 //                Intent intent = new Intent(GameActivity.this, MainActivity.class);
 //                intent.putExtra();
 //                startActivityForResult(intent, 1);
 
-
+                }
             }
         });
-
 
     }
 }
