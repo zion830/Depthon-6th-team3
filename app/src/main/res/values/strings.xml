@@ -3,9 +3,18 @@
     <string name="all_ok">확인</string>
     <string name="all_cancel">취소</string>
     <string name="all_err">오류가 발생했습니다. 다시 시도해주세요!</string>
+    <string name="all_user">님</string>
 
+    <string name="login_finish">입장하기 →</string>
     <string name="login_input_name">닉네임을 입력해주세요.</string>
     <string name="login_already_used">이미 사용중인 닉네임입니다.</string>
     <string name="login_success">로그인 성공! 환영합니다.</string>
     <string name="title_name">로그인</string>
+
+    <string name="main_latest">최신순</string>
+    <string name="main_favorite">인기순</string>
+    <string name="main_my_poem">내 삼행시</string>
+    <string name="main_start">시작하자</string>
+
+    <string name="game_submit">제출하기</string>
 </resources>
