@@ -1,7 +1,9 @@
 package com.depromeet.activity;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
@@ -30,13 +32,21 @@ public class PopupDialogFragment extends DialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
-        View view = getActivity().getLayoutInflater().inflate(R.layout.activity_popup, null);
+        final View view = getActivity().getLayoutInflater().inflate(R.layout.activity_popup, null);
 
         builder.setView(view);
 
         mbackBtn = view.findViewById(R.id.tv_popup_back);
+        mbackBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(),MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
         mheartBtn = view.findViewById(R.id.tv_popup_heart);
         mNameText = view.findViewById(R.id.tv_popup_name);
         mLikeCountText = view.findViewById(R.id.tv_popup_like);

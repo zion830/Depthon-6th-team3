@@ -8,8 +8,9 @@
     <ImageView
         android:layout_width="347dp"
         android:layout_height="365dp"
-        android:layout_gravity="center_horizontal"
+        android:layout_gravity="center_horizontal|bottom"
         android:layout_marginTop="20dp"
+        android:layout_marginBottom="100dp"
         android:scaleType="fitCenter"
         android:src="@drawable/back_main" />
 
