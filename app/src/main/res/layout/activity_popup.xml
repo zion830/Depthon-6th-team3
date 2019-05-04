@@ -1,0 +1,151 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <Button
+            android:id="@+id/tv_popup_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginRight="20dp"
+            android:src="@drawable/ic_arrow_forward"
+    />
+
+
+    <LinearLayout
+            android:layout_width="295dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="156dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:radius = "10dp"
+            android:color = "#ffffff"
+            android:orientation="vertical">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:color="#ff8479">
+            <TextView
+                    android:id="@+id/tv_popup_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="12dp"
+                    android:text="영걸님"
+                    android:textColor="@android:color/black"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+            />
+
+            <Button
+                    android:id="@+id/tv_popup_heart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="2dp"
+                    android:src="@drawable/ic_heart"
+            />
+
+            <TextView
+                    android:id="@+id/tv_popup_like"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:layout_marginRight="16.3dp"
+                    android:text="12"
+                    android:textColor="@android:color/white"
+                    android:textSize="13sp"
+            />
+
+
+        </LinearLayout>
+
+
+
+        <TextView
+                android:id="@+id/tv_popup_first"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="18dp"
+                android:text="에"
+                android:textColor="@android:color/white"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:radius = "10dp"
+                android:color = "#00aead"
+        />
+
+        <TextView
+                android:id="@+id/tv_popup_first_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="31dp"
+                android:text="야 얘야"
+                android:textColor="@android:color/black"
+                android:textSize="24sp"
+                android:textStyle="bold"
+        />
+
+        <TextView
+                android:id="@+id/tv_popup_second"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginLeft="18dp"
+                android:text="너"
+                android:textColor="@android:color/white"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:radius = "10dp"
+                android:color = "#00aead"
+        />
+
+        <TextView
+                android:id="@+id/tv_popup_second_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:layout_marginLeft="31dp"
+                android:text="얼마 있냐?"
+                android:textColor="@android:color/black"
+                android:textSize="24sp"
+                android:textStyle="bold"
+        />
+
+        <TextView
+                android:id="@+id/tv_popup_third"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginLeft="18dp"
+                android:text="지"
+                android:textColor="@android:color/white"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:radius = "10dp"
+                android:color = "#00aead"
+        />
+
+        <TextView
+                android:id="@+id/tv_popup_third_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:layout_marginLeft="31dp"
+                android:text="져서 나오면 100대야 알았어?"
+                android:textColor="@android:color/black"
+                android:textSize="24sp"
+                android:textStyle="bold"
+        />
+
+    </LinearLayout>
+
+
+
+
+</FrameLayout>
