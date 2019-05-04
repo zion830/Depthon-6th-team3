@@ -33,6 +33,7 @@
             android:paddingStart="30dp"
             android:text="0"
             android:textColor="@android:color/white" />
+
     </RelativeLayout>
 
     <include layout="@layout/layout_main_item_poem" />

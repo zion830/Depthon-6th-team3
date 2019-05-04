@@ -74,7 +74,7 @@ public class GameActivity extends AppCompatActivity {
 
 
                 // 5초 지난 후, 단어 등장과 함께 1분 카운트 시작
-                new CountDownTimer(60000, 1000) {
+                new CountDownTimer(3000, 1000) {
                     @Override
                     public void onTick(long millisUntilFinished) {
                         mQuizTimerText.setText(Integer.toString(--mQuizTime));
