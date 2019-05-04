@@ -4,9 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
-import android.widget.GridView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -26,9 +24,11 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import in.srain.cube.views.GridViewWithHeaderAndFooter;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private FloatingActionButton mGameStartBtn;
-    private GridView mPoemGridView;
+    private GridViewWithHeaderAndFooter mPoemGridView;
     private PoemGridAdapter adapter;
     private LoginManager manager;
     private ProgressBar mMainProgress;
@@ -44,11 +44,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initView() {
+        View header = getLayoutInflater().inflate(R.layout.header_main, null, false);
         mGameStartBtn = (FloatingActionButton) findViewById(R.id.fb_main_start);
-        mPoemGridView = (GridView) findViewById(R.id.grid_main_poem);
+        mPoemGridView = (GridViewWithHeaderAndFooter) findViewById(R.id.grid_main_poem);
         mMainProgress = (ProgressBar) findViewById(R.id.progress_main);
 
         adapter = new PoemGridAdapter(poems);
+        mPoemGridView.addHeaderView(header); // 리스트 상단 뷰 추가
         mPoemGridView.setAdapter(adapter);
         mGameStartBtn.setOnClickListener(this);
         showProgress();
