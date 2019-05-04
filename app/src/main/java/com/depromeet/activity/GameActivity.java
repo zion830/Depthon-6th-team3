@@ -47,12 +47,6 @@ public class GameActivity extends AppCompatActivity {
 
         mSubmitBtn = findViewById(R.id.fb_game_submit);
 
-        // 입력된 단어, 입력 안된 단어 색상변경
-        if (mQuizFirstAnswerEdit.getText().toString().length() == 0) {
-            mQuizFirstWordText.setBackground(ContextCompat.getDrawable(GameActivity.this, R.drawable.ic_word_vacant));
-        } else {
-            mQuizFirstWordText.setBackground(ContextCompat.getDrawable(GameActivity.this, R.drawable.ic_word));
-        }
 
         // 5초 카운터
         new CountDownTimer(5000, 1000) {
@@ -69,19 +63,28 @@ public class GameActivity extends AppCompatActivity {
             public void onFinish() {
                 // 단어 셋팅
                 mStartTimerText.setText("디프만");
+
                 mQuizFirstWordText.setText(Character.toString(mStartTimerText.getText().charAt(0)));
                 mQuizSecondWordText.setText(Character.toString(mStartTimerText.getText().charAt(1)));
                 mQuizThirdWordText.setText(Character.toString(mStartTimerText.getText().charAt(2)));
 
                 mQuizFirstAnswerEdit.setEnabled(true);
                 mQuizSecondAnswerEdit.setEnabled(true);
-                mQuizThirdWordText.setEnabled(true);
+                mQuizThirdAnswerEdit.setEnabled(true);
+
 
                 // 5초 지난 후, 단어 등장과 함께 1분 카운트 시작
-                new CountDownTimer(3000, 1000) {
+                new CountDownTimer(60000, 1000) {
                     @Override
                     public void onTick(long millisUntilFinished) {
                         mQuizTimerText.setText(Integer.toString(--mQuizTime));
+                        if (!mQuizFirstAnswerEdit.getText().toString().equals("")) {
+                            mQuizFirstWordText.setBackground(ContextCompat.getDrawable(GameActivity.this, R.drawable.ic_word)); }
+                        if (!mQuizSecondAnswerEdit.getText().toString().equals("")) {
+                            mQuizSecondWordText.setBackground(ContextCompat.getDrawable(GameActivity.this, R.drawable.ic_word)); }
+                        if (!mQuizThirdAnswerEdit.getText().toString().equals("")) {
+                            mQuizThirdWordText.setBackground(ContextCompat.getDrawable(GameActivity.this, R.drawable.ic_word));
+                        }
                     }
 
                     @Override
