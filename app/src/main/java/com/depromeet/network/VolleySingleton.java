@@ -11,6 +11,10 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONObject;
 
+import java.util.Locale;
+
+import static com.depromeet.network.RequestURL.BASE_URL;
+
 public class VolleySingleton {
     private static VolleySingleton instance;
     private RequestQueue requestQueue;
@@ -39,12 +43,16 @@ public class VolleySingleton {
         getRequestQueue().add(req);
     }
 
+    static String getUrl(String direction) {
+        return String.format(Locale.getDefault(), "%s/%s", BASE_URL, direction);
+    }
+
     public void get(String direction, final VolleyResponseListener listener) {
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET,
-                RequestURL.getUrl(direction), null, new Response.Listener<JSONObject>() {
+                getUrl(direction), null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                listener.onSuccess(response.toString());
+                listener.onSuccess(response);
             }
         }, new Response.ErrorListener() {
             @Override
@@ -57,11 +65,11 @@ public class VolleySingleton {
     }
 
     public void post(String direction, JSONObject reqObj, final VolleyResponseListener listener) {
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET,
-                RequestURL.getUrl(direction), reqObj, new Response.Listener<JSONObject>() {
+        JsonObjectRequest request = new JsonObjectRequest(
+                getUrl(direction), reqObj, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                listener.onSuccess(response.toString());
+                listener.onSuccess(response);
             }
         }, new Response.ErrorListener() {
             @Override
@@ -70,5 +78,7 @@ public class VolleySingleton {
             }
         }
         );
+
+        instance.addToRequestQueue(request);
     }
 }
