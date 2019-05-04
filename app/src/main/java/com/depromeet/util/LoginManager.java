@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 public class LoginManager {
     private static final String sharedPrefName = "mannaja_sharedpref";
     private static final String KEY_NAME = "key_name";
+    private static final String KEY_USER_ID = "key_user_id";
 
     private static LoginManager mInstance;
     private SharedPreferences sharedPreferences;
@@ -30,6 +31,16 @@ public class LoginManager {
 
     public String getUserName() {
         return sharedPreferences.getString(KEY_NAME, "");
+    }
+
+    public void setUserId(int id) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt(KEY_USER_ID, id);
+        editor.apply();
+    }
+
+    public int getUserId() {
+        return sharedPreferences.getInt(KEY_USER_ID, 0);
     }
 
     public boolean isLoggedIn() {

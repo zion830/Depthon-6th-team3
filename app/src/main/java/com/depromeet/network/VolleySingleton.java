@@ -6,9 +6,11 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.Locale;
@@ -52,6 +54,23 @@ public class VolleySingleton {
                 getUrl(direction), null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
+                listener.onSuccess(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                listener.onError(error);
+            }
+        });
+
+        instance.addToRequestQueue(request);
+    }
+
+    public void get(String direction, final VolleyArrayResponseListener listener) {
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET,
+                getUrl(direction), null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
                 listener.onSuccess(response);
             }
         }, new Response.ErrorListener() {

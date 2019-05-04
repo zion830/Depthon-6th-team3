@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/item_poem_back"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -14,16 +15,25 @@
             android:id="@+id/tv_poem_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="영걸"
+            android:layout_centerVertical="true"
+            android:text="영걸님"
             android:textColor="@android:color/white"
             android:textStyle="bold" />
 
-        <TextView
+        <Button
+            android:id="@+id/btn_poem_like"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/tv_poem_name"
-            android:text="@string/all_user"
-            android:textColor="@android:color/white"
-            android:textSize="9sp" />
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="bottom"
+            android:background="@android:color/transparent"
+            android:drawableStart="@drawable/ic_heart_fill_white"
+            android:gravity="center"
+            android:minHeight="0dp"
+            android:paddingStart="30dp"
+            android:text="0"
+            android:textColor="@android:color/white" />
     </RelativeLayout>
+
+    <include layout="@layout/layout_main_item_poem" />
 </LinearLayout>

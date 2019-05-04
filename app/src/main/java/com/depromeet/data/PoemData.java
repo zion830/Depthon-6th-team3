@@ -1,37 +1,92 @@
 package com.depromeet.data;
 
+import com.google.gson.annotations.SerializedName;
+
 public class PoemData {
-    private String first;
-    private String second;
-    private String third;
+    @SerializedName("id")
+    private int id;
 
-    public PoemData(String first, String second, String third) {
-        this.first = first;
-        this.second = second;
-        this.third = third;
+    @SerializedName("wordFirst")
+    private String wordFirst;
+
+    @SerializedName("wordSecond")
+    private String wordSecond;
+
+    @SerializedName("wordThird")
+    private String wordThird;
+
+    @SerializedName("likeCount")
+    private int likeCount;
+
+    @SerializedName("username")
+    private String userName;
+
+    @SerializedName("like")
+    private boolean like;
+
+    public PoemData(int id, String wordFirst, String wordSecond, String wordThird, int likeCount, String userName, boolean like) {
+        this.id = id;
+        this.wordFirst = wordFirst;
+        this.wordSecond = wordSecond;
+        this.wordThird = wordThird;
+        this.likeCount = likeCount;
+        this.userName = userName;
+        this.like = like;
     }
 
-    public String getFirst() {
-        return first;
+    public int getId() {
+        return id;
     }
 
-    public void setFirst(String first) {
-        this.first = first;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getSecond() {
-        return second;
+    public String getWordFirst() {
+        return wordFirst;
     }
 
-    public void setSecond(String second) {
-        this.second = second;
+    public void setWordFirst(String wordFirst) {
+        this.wordFirst = wordFirst;
     }
 
-    public String getThird() {
-        return third;
+    public String getWordSecond() {
+        return wordSecond;
     }
 
-    public void setThird(String third) {
-        this.third = third;
+    public void setWordSecond(String wordSecond) {
+        this.wordSecond = wordSecond;
+    }
+
+    public String getWordThird() {
+        return wordThird;
+    }
+
+    public void setWordThird(String wordThird) {
+        this.wordThird = wordThird;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public int getLikeCount() {
+        return likeCount;
+    }
+
+    public void setLikeCount(int likeCount) {
+        this.likeCount = likeCount;
+    }
+
+    public boolean isLike() {
+        return like;
+    }
+
+    public void setLike(boolean like) {
+        this.like = like;
     }
 }

@@ -86,16 +86,18 @@ public class LoginActivity extends AppCompatActivity implements VolleyResponseLi
     @Override
     public void onSuccess(JSONObject response) {
         String userName = mUserNameEdit.getText().toString();
-        int state = 0;
+        int state = 0, userId = 0;
 
         try {
             state = response.getInt("status");
+            userId = response.getJSONObject("response").getInt("id");
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
         if (state == 200) {
             manager.userLogin(userName);
+            manager.setUserId(userId);
             Toast.makeText(this, R.string.login_success, Toast.LENGTH_SHORT).show();
             startMainActivity();
         } else if (state == 406) {
@@ -110,8 +112,6 @@ public class LoginActivity extends AppCompatActivity implements VolleyResponseLi
     @Override
     public void onError(VolleyError error) {
         Toast.makeText(this, R.string.all_err, Toast.LENGTH_SHORT).show();
-
-        Log.d("err", error.toString());
         hideProgress();
     }
 }

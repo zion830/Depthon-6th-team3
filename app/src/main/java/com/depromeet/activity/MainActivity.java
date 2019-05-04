@@ -4,16 +4,36 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.GridView;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
+import com.android.volley.VolleyError;
 import com.depromeet.R;
+import com.depromeet.adapter.PoemGridAdapter;
+import com.depromeet.data.PoemData;
+import com.depromeet.network.RequestURL;
+import com.depromeet.network.VolleyArrayResponseListener;
+import com.depromeet.network.VolleySingleton;
 import com.depromeet.util.LoginManager;
+import com.google.gson.Gson;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private FloatingActionButton mGameStartBtn;
     private GridView mPoemGridView;
+    private PoemGridAdapter adapter;
     private LoginManager manager;
+    private ProgressBar mMainProgress;
+    private ArrayList<PoemData> poems = new ArrayList<>();
+    private int page = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,12 +46,50 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void initView() {
         mGameStartBtn = (FloatingActionButton) findViewById(R.id.fb_main_start);
         mPoemGridView = (GridView) findViewById(R.id.grid_main_poem);
+        mMainProgress = (ProgressBar) findViewById(R.id.progress_main);
 
+        adapter = new PoemGridAdapter(poems);
+        mPoemGridView.setAdapter(adapter);
         mGameStartBtn.setOnClickListener(this);
+        showProgress();
+        requestPoemByDateList();
     }
 
-    private void requestPoemList() {
+    private void requestPoemByDateList() {
+        int userId = manager.getUserId();
+        VolleySingleton helper = VolleySingleton.getInstance(this);
+        helper.get(RequestURL.getPoemsByDateUrl(page, userId), new VolleyArrayResponseListener() {
+            @Override
+            public void onSuccess(JSONArray response) {
+                Gson gson = new Gson();
+                try {
+                    for (int i = 0; i < response.length(); i++) {
+                        JSONObject poem = response.getJSONObject(i);
+                        PoemData data = gson.fromJson(poem.toString(), PoemData.class);
+                        adapter.addPoem(data);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
 
+                adapter.notifyDataSetChanged();
+                hideProgress();
+            }
+
+            @Override
+            public void onError(VolleyError error) {
+                Toast.makeText(MainActivity.this, R.string.all_err, Toast.LENGTH_SHORT).show();
+                hideProgress();
+            }
+        });
+    }
+
+    private void showProgress() {
+        mMainProgress.setVisibility(View.VISIBLE);
+    }
+
+    private void hideProgress() {
+        mMainProgress.setVisibility(View.INVISIBLE);
     }
 
     @Override

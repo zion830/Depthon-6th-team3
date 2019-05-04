@@ -159,7 +159,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="44dp"
                     android:orientation="horizontal"
-                    android:paddingBottom="10dp">
+                    android:paddingBottom="14dp">
 
                     <Button
                         android:id="@+id/btn_main_latest"
@@ -202,7 +202,9 @@
                     android:id="@+id/grid_main_poem"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:numColumns="2" />
+                    android:horizontalSpacing="4dp"
+                    android:numColumns="2"
+                    android:verticalSpacing="6dp" />
             </LinearLayout>
         </FrameLayout>
 
@@ -231,4 +233,11 @@
             android:textColor="@android:color/white"
             android:textSize="14sp" />
     </FrameLayout>
+
+    <ProgressBar
+        android:id="@+id/progress_main"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="invisible" />
 </FrameLayout>
