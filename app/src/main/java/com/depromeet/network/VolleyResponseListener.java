@@ -1,4 +1,4 @@
-package com.example.project.network;
+package com.depromeet.network;
 
 import com.android.volley.VolleyError;
 
