@@ -1,4 +1,6 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion 28
@@ -36,4 +38,10 @@ dependencies {
 
     // GridView 라이브러리
     implementation 'in.srain.cube:grid-view-with-header-footer:1.0.12'
+
+    // kotlin project
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+}
+repositories {
+    mavenCentral()
 }

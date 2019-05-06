@@ -1,13 +1,11 @@
 package com.depromeet.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -15,12 +13,14 @@ import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.depromeet.R;
+import com.depromeet.data.PoemData;
 import com.depromeet.network.RequestURL;
 import com.depromeet.network.VolleyResponseListener;
 import com.depromeet.network.VolleySingleton;
 import com.depromeet.util.FailDialog;
 import com.depromeet.util.LoginManager;
 import com.depromeet.util.PassDialog;
+import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -30,30 +30,32 @@ public class GameActivity extends AppCompatActivity {
     private int mQuizTime = 60;
     private String word = "";
     private LoginManager manager;
-    TextView mStartTimerText;
-    TextView mQuizTimerText;
-    TextView mQuizFirstWordText;
-    TextView mQuizSecondWordText;
-    TextView mQuizThirdWordText;
-    EditText mQuizFirstAnswerEdit;
-    EditText mQuizSecondAnswerEdit;
-    EditText mQuizThirdAnswerEdit;
-    FloatingActionButton mSubmitBtn;
+    private VolleySingleton helper;
+    private TextView mStartTimerText;
+    private TextView mQuizTimerText;
+    private TextView mQuizFirstWordText;
+    private TextView mQuizSecondWordText;
+    private TextView mQuizThirdWordText;
+    private EditText mQuizFirstAnswerEdit;
+    private EditText mQuizSecondAnswerEdit;
+    private EditText mQuizThirdAnswerEdit;
+    private FloatingActionButton mSubmitBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         manager = new LoginManager(this);
+        helper = VolleySingleton.getInstance(GameActivity.this);
 
         mStartTimerText = findViewById(R.id.tv_game_beginCounter);
         mQuizTimerText = findViewById(R.id.tv_game_timer);
         mQuizFirstWordText = findViewById(R.id.tv_game_firstword);
         mQuizSecondWordText = findViewById(R.id.tv_game_secondword);
         mQuizThirdWordText = findViewById(R.id.tv_game_thirdword);
-        mQuizFirstAnswerEdit = findViewById(R.id.et_game_firstword);
-        mQuizSecondAnswerEdit = findViewById(R.id.et_game_secondword);
-        mQuizThirdAnswerEdit = findViewById(R.id.et_game_thirdword);
+        mQuizFirstAnswerEdit = findViewById(R.id.et_game_first);
+        mQuizSecondAnswerEdit = findViewById(R.id.et_game_second);
+        mQuizThirdAnswerEdit = findViewById(R.id.et_game_third);
         mSubmitBtn = findViewById(R.id.fb_game_submit);
         requestRandomWord();
 
@@ -107,8 +109,7 @@ public class GameActivity extends AppCompatActivity {
                         handler.postDelayed(new Runnable() {
                             public void run() {
                                 dialog.dismiss();
-                                startActivity(new Intent(getApplicationContext(), MainActivity.class));
-
+                                finish();
                             }
                         }, 2000);
                     }
@@ -124,30 +125,26 @@ public class GameActivity extends AppCompatActivity {
                         (mQuizSecondAnswerEdit.getText().toString().length() != 0) &&
                         (mQuizThirdAnswerEdit.getText().toString().length() != 0)) {
                     // 참!잘했어요 팝업창
-                    final PassDialog dialog = new PassDialog(GameActivity.this);
-                    dialog.show();
-
-                    Handler handler = new Handler();
-                    handler.postDelayed(new Runnable() {
-                        public void run() {
-                            dialog.dismiss();
-                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
-
-                        }
-                    }, 2000);
-
-                    // 데이터 저장
-//                Intent intent = new Intent(GameActivity.this, MainActivity.class);
-//                intent.putExtra();
-//                startActivityForResult(intent, 1);
-
+                    showGoodDialog();
                 }
             }
         });
     }
 
+    private void showGoodDialog() {
+        final PassDialog dialog = new PassDialog(GameActivity.this);
+        dialog.show();
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                dialog.dismiss();
+                finish();
+            }
+        }, 2000);
+    }
+
     public void requestRandomWord() {
-        VolleySingleton helper = VolleySingleton.getInstance(GameActivity.this);
         helper.get(RequestURL.CREATE_WORD, new VolleyResponseListener() {
             @Override
             public void onSuccess(JSONObject response) {
@@ -161,8 +158,37 @@ public class GameActivity extends AppCompatActivity {
             @Override
             public void onError(VolleyError error) {
                 Toast.makeText(GameActivity.this, R.string.all_err, Toast.LENGTH_SHORT).show();
-                Log.e("err", error.toString());
             }
         });
+    }
+
+    public void requestSavePoem() {
+        PoemData poemData = new PoemData(
+                manager.getUserId(),
+                mQuizFirstAnswerEdit.getText().toString(),
+                mQuizSecondAnswerEdit.getText().toString(),
+                mQuizThirdAnswerEdit.getText().toString(),
+                0,
+                manager.getUserName(),
+                false
+        );
+
+        try {
+            helper.post(RequestURL.CREATE_WORD,
+                    new JSONObject(new Gson().toJson(poemData, PoemData.class)),
+                    new VolleyResponseListener() {
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            showGoodDialog();
+                        }
+
+                        @Override
+                        public void onError(VolleyError error) {
+                            Toast.makeText(GameActivity.this, R.string.all_err, Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 }

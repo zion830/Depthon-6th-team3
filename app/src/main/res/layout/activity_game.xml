@@ -10,7 +10,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -20,13 +19,11 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="258dp"
                     android:background="@drawable/back_quiz_main"
                     android:orientation="vertical">
-
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -34,18 +31,17 @@
                         android:gravity="center">
 
                         <ImageView
-                            android:id="@+id/tv_game_timericon"
+                            android:id="@+id/iv_game_timer"
                             android:layout_width="38dp"
                             android:layout_height="25dp"
                             android:layout_gravity="center"
-                            android:layout_marginRight="5dp"
+                            android:layout_marginEnd="5dp"
                             android:src="@drawable/ic_timer_clock" />
 
                         <TextView
                             android:id="@+id/tv_game_timer"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:letterSpacing="-0.03"
                             android:lineSpacingExtra="10sp"
                             android:text="60"
                             android:textColor="#ffffff"
@@ -95,20 +91,16 @@
                             android:textSize="25sp" />
 
                         <EditText
-                            android:id="@+id/et_game_firstword"
+                            android:id="@+id/et_game_first"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
                             android:background="@drawable/back_insert_text"
                             android:hint="입력!"
-                            android:letterSpacing="-0.02"
                             android:lineSpacingExtra="3sp"
                             android:maxLines="1"
                             android:paddingStart="10dp"
-                            android:textColor="#c3c3c3"
                             android:textSize="14sp" />
-
-
                     </LinearLayout>
 
                     <LinearLayout
@@ -132,16 +124,14 @@
                             android:textSize="25sp" />
 
                         <EditText
-                            android:id="@+id/et_game_secondword"
+                            android:id="@+id/et_game_second"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
                             android:background="@drawable/back_insert_text"
                             android:hint="입력!"
-                            android:letterSpacing="-0.02"
                             android:lineSpacingExtra="3sp"
                             android:paddingStart="10dp"
-                            android:textColor="#c3c3c3"
                             android:textSize="14sp" />
 
                     </LinearLayout>
@@ -167,25 +157,20 @@
                             android:textSize="25sp" />
 
                         <EditText
-                            android:id="@+id/et_game_thirdword"
+                            android:id="@+id/et_game_third"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
                             android:background="@drawable/back_insert_text"
                             android:hint="입력!"
-                            android:letterSpacing="-0.02"
                             android:lineSpacingExtra="3sp"
                             android:maxLines="1"
                             android:paddingStart="10dp"
-                            android:textColor="#c3c3c3"
                             android:textSize="14sp" />
 
                     </LinearLayout>
-
                 </LinearLayout>
-
             </LinearLayout>
-
         </ScrollView>
 
     </LinearLayout>
@@ -208,7 +193,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:elevation="16dp"
-            android:text="제출하자"
+            android:text="@string/game_submit"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@android:color/white"
             android:textSize="14sp" />

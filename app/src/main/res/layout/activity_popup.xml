@@ -5,8 +5,6 @@
     android:background="@drawable/back_info"
     android:orientation="vertical">
 
-
-
     <Button
         android:id="@+id/tv_popup_back"
         android:layout_width="45dp"

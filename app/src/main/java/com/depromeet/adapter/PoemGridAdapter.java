@@ -27,6 +27,10 @@ public class PoemGridAdapter extends BaseAdapter {
         poems.add(poemData);
     }
 
+    public void clear() {
+        poems.clear();
+    }
+
     @Override
     public int getCount() {
         return poems.size();

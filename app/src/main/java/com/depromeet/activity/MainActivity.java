@@ -2,6 +2,7 @@ package com.depromeet.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -102,5 +103,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(startGame);
                 break;
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        adapter.clear();
+        requestPoemByDateList();
     }
 }
