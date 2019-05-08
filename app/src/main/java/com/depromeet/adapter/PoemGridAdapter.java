@@ -8,23 +8,23 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.depromeet.R;
-import com.depromeet.data.PoemData;
+import com.depromeet.data.Poem;
 
 import java.util.ArrayList;
 
 public class PoemGridAdapter extends BaseAdapter {
-    private ArrayList<PoemData> poems;
+    private ArrayList<Poem> poems;
 
-    public PoemGridAdapter(ArrayList<PoemData> poems) {
+    public PoemGridAdapter(ArrayList<Poem> poems) {
         this.poems = poems;
     }
 
-    public void setPoems(ArrayList<PoemData> poems) {
+    public void setPoems(ArrayList<Poem> poems) {
         this.poems = poems;
     }
 
-    public void addPoem(PoemData poemData) {
-        poems.add(poemData);
+    public void addPoem(Poem poem) {
+        poems.add(poem);
     }
 
     public void clear() {
@@ -37,7 +37,7 @@ public class PoemGridAdapter extends BaseAdapter {
     }
 
     @Override
-    public PoemData getItem(int i) {
+    public Poem getItem(int i) {
         return poems.get(i);
     }
 
@@ -49,7 +49,7 @@ public class PoemGridAdapter extends BaseAdapter {
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         final Context context = viewGroup.getContext();
-        PoemData poemItem = poems.get(i);
+        Poem poemItem = poems.get(i);
 
         if (view == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

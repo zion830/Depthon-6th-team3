@@ -9,23 +9,20 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.android.volley.VolleyError;
 import com.depromeet.R;
 import com.depromeet.adapter.PoemGridAdapter;
-import com.depromeet.data.PoemData;
-import com.depromeet.network.RequestURL;
-import com.depromeet.network.VolleyArrayResponseListener;
-import com.depromeet.network.VolleySingleton;
+import com.depromeet.data.Poem;
+import com.depromeet.network.RetrofitBuilder;
+import com.depromeet.network.ServiceApi;
 import com.depromeet.util.LoginManager;
-import com.google.gson.Gson;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import in.srain.cube.views.GridViewWithHeaderAndFooter;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private FloatingActionButton mGameStartBtn;
@@ -33,7 +30,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private PoemGridAdapter adapter;
     private LoginManager manager;
     private ProgressBar mMainProgress;
-    private ArrayList<PoemData> poems = new ArrayList<>();
+    private ArrayList<Poem> poems = new ArrayList<>();
     private int page = 0;
 
     @Override
@@ -55,32 +52,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mPoemGridView.setAdapter(adapter);
         mGameStartBtn.setOnClickListener(this);
         showProgress();
-        requestPoemByDateList();
+        requestPoemsByDate();
     }
 
-    private void requestPoemByDateList() {
+    private void requestPoemsByDate() {
         int userId = manager.getUserId();
-        VolleySingleton helper = VolleySingleton.getInstance(this);
-        helper.get(RequestURL.getPoemsByDateUrl(page, userId), new VolleyArrayResponseListener() {
+        ServiceApi service = RetrofitBuilder.INSTANCE.getInstance();
+        service.getByDate(page, userId).enqueue(new Callback<List<Poem>>() {
             @Override
-            public void onSuccess(JSONArray response) {
-                Gson gson = new Gson();
-                try {
-                    for (int i = 0; i < response.length(); i++) {
-                        JSONObject poem = response.getJSONObject(i);
-                        PoemData data = gson.fromJson(poem.toString(), PoemData.class);
-                        adapter.addPoem(data);
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
+            public void onResponse(Call<List<Poem>> call, Response<List<Poem>> response) {
+                if (response.body() != null) {
+                    poems.addAll(response.body());
+                    adapter.notifyDataSetChanged();
                 }
-
-                adapter.notifyDataSetChanged();
                 hideProgress();
             }
 
             @Override
-            public void onError(VolleyError error) {
+            public void onFailure(Call<List<Poem>> call, Throwable t) {
                 Toast.makeText(MainActivity.this, R.string.all_err, Toast.LENGTH_SHORT).show();
                 hideProgress();
             }
@@ -109,6 +98,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         adapter.clear();
-        requestPoemByDateList();
+        requestPoemsByDate();
     }
 }

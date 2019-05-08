@@ -6,13 +6,13 @@ import com.google.gson.annotations.SerializedName
 data class LoginResponse(
         @Expose
         @SerializedName("status")
-        private val status: Int = 0,
+        val status: Int = 0,
 
         @Expose
         @SerializedName("message")
-        private val message: String,
+        val message: String,
 
         @Expose
         @SerializedName("response")
-        private val user: User
+        val user: User
 )

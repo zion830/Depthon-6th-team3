@@ -11,26 +11,25 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.VolleyError;
 import com.depromeet.R;
-import com.depromeet.data.PoemData;
-import com.depromeet.network.RequestURL;
-import com.depromeet.network.VolleyResponseListener;
-import com.depromeet.network.VolleySingleton;
+import com.depromeet.data.Poem;
+import com.depromeet.data.WordResponse;
+import com.depromeet.network.RetrofitBuilder;
+import com.depromeet.network.ServiceApi;
 import com.depromeet.util.FailDialog;
 import com.depromeet.util.LoginManager;
 import com.depromeet.util.PassDialog;
-import com.google.gson.Gson;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class GameActivity extends AppCompatActivity {
     private int mStartTime = 5;
     private int mQuizTime = 60;
     private String word = "";
     private LoginManager manager;
-    private VolleySingleton helper;
+    private ServiceApi service;
     private TextView mStartTimerText;
     private TextView mQuizTimerText;
     private TextView mQuizFirstWordText;
@@ -46,7 +45,7 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         manager = new LoginManager(this);
-        helper = VolleySingleton.getInstance(GameActivity.this);
+        service = RetrofitBuilder.INSTANCE.getInstance();
 
         mStartTimerText = findViewById(R.id.tv_game_beginCounter);
         mQuizTimerText = findViewById(R.id.tv_game_timer);
@@ -145,50 +144,40 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public void requestRandomWord() {
-        helper.get(RequestURL.CREATE_WORD, new VolleyResponseListener() {
+        service.getRandomWord().enqueue(new Callback<WordResponse>() {
             @Override
-            public void onSuccess(JSONObject response) {
-                try {
-                    word = response.getJSONObject("response").getString("hangshi");
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+            public void onResponse(Call<WordResponse> call, Response<WordResponse> response) {
+                word = response.body().getWord().getHangshi();
             }
 
             @Override
-            public void onError(VolleyError error) {
+            public void onFailure(Call<WordResponse> call, Throwable t) {
                 Toast.makeText(GameActivity.this, R.string.all_err, Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     public void requestSavePoem() {
-        PoemData poemData = new PoemData(
+        Poem poem = new Poem(
                 manager.getUserId(),
+                manager.getUserName(),
                 mQuizFirstAnswerEdit.getText().toString(),
                 mQuizSecondAnswerEdit.getText().toString(),
                 mQuizThirdAnswerEdit.getText().toString(),
                 0,
-                manager.getUserName(),
                 false
         );
 
-        try {
-            helper.post(RequestURL.CREATE_WORD,
-                    new JSONObject(new Gson().toJson(poemData, PoemData.class)),
-                    new VolleyResponseListener() {
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            showGoodDialog();
-                        }
+        service.savePoem(poem).enqueue(new Callback<com.depromeet.data.Response>() {
+            @Override
+            public void onResponse(Call<com.depromeet.data.Response> call, Response<com.depromeet.data.Response> response) {
 
-                        @Override
-                        public void onError(VolleyError error) {
-                            Toast.makeText(GameActivity.this, R.string.all_err, Toast.LENGTH_SHORT).show();
-                        }
-                    });
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+            }
+
+            @Override
+            public void onFailure(Call<com.depromeet.data.Response> call, Throwable t) {
+
+            }
+        });
     }
 }

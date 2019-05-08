@@ -3,12 +3,14 @@ package com.depromeet.data
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-data class User(
+class User constructor(
         @Expose
         @SerializedName("id")
-        var id: Int,
+        val id: Int,
 
         @Expose
         @SerializedName("name")
-        var name: String?
-)
+        val name: String
+) {
+    constructor(name: String) : this(-1, name)
+}
