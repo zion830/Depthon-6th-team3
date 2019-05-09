@@ -25,7 +25,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class GameActivity extends AppCompatActivity {
-    private int mStartTime = 5;
+    private int mStartTime = 3;
     private int mQuizTime = 60;
     private String word = "";
     private LoginManager manager;

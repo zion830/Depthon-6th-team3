@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.depromeet.R;
@@ -63,6 +64,7 @@ public class PoemGridAdapter extends BaseAdapter {
         TextView contentText1 = (TextView) view.findViewById(R.id.tv_poem_content1);
         TextView contentText2 = (TextView) view.findViewById(R.id.tv_poem_content2);
         TextView contentText3 = (TextView) view.findViewById(R.id.tv_poem_content3);
+        LinearLayout poemLayout = (LinearLayout) view.findViewById(R.id.layout_poem);
 
         userNameText.setText(poemItem.getUserName());
         titleText1.setText(poemItem.getWordFirst().substring(0, 1));

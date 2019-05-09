@@ -11,7 +11,7 @@ interface ServiceApi {
     @POST("login")
     fun userLogin(@Body user: User): Call<LoginResponse>
 
-    @POST("hangshis/create")
+    @GET("hangshis/create")
     fun getRandomWord(): Call<WordResponse>
 
     @POST("hangshis/save_hangshi")
