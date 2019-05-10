@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/white"
     tools:context=".activity.MainActivity">
 
     <ImageView
@@ -14,13 +16,25 @@
         android:scaleType="fitCenter"
         android:src="@drawable/back_main" />
 
-    <in.srain.cube.views.GridViewWithHeaderAndFooter
-        android:id="@+id/grid_main_poem"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:horizontalSpacing="4dp"
-        android:numColumns="2"
-        android:verticalSpacing="6dp" />
+        android:orientation="vertical">
+
+        <include layout="@layout/header_main" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_main_poem"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginBottom="10dp"
+            android:horizontalSpacing="4dp"
+            android:verticalSpacing="6dp"
+            app:layoutManager="android.support.v7.widget.GridLayoutManager"
+            app:spanCount="2" />
+    </LinearLayout>
 
     <FrameLayout
         android:layout_width="wrap_content"

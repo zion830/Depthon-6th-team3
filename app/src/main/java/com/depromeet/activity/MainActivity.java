@@ -5,12 +5,13 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.depromeet.R;
-import com.depromeet.adapter.PoemGridAdapter;
+import com.depromeet.adapter.PoemListAdapter;
 import com.depromeet.data.Poem;
 import com.depromeet.network.RetrofitBuilder;
 import com.depromeet.network.ServiceApi;
@@ -19,15 +20,14 @@ import com.depromeet.util.LoginManager;
 import java.util.ArrayList;
 import java.util.List;
 
-import in.srain.cube.views.GridViewWithHeaderAndFooter;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private FloatingActionButton mGameStartBtn;
-    private GridViewWithHeaderAndFooter mPoemGridView;
-    private PoemGridAdapter adapter;
+    private RecyclerView mPoemRecyclerView;
+    private PoemListAdapter adapter;
     private LoginManager manager;
     private ProgressBar mMainProgress;
     private ArrayList<Poem> poems = new ArrayList<>();
@@ -44,12 +44,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void initView() {
         View header = getLayoutInflater().inflate(R.layout.header_main, null, false);
         mGameStartBtn = (FloatingActionButton) findViewById(R.id.fb_main_start);
-        mPoemGridView = (GridViewWithHeaderAndFooter) findViewById(R.id.grid_main_poem);
+        mPoemRecyclerView = (RecyclerView) findViewById(R.id.rv_main_poem);
         mMainProgress = (ProgressBar) findViewById(R.id.progress_main);
 
-        adapter = new PoemGridAdapter(poems);
-        mPoemGridView.addHeaderView(header); // 리스트 상단 뷰 추가
-        mPoemGridView.setAdapter(adapter);
+        adapter = new PoemListAdapter();
+        mPoemRecyclerView.setAdapter(adapter);
+
         mGameStartBtn.setOnClickListener(this);
         showProgress();
         requestPoemsByDate();
@@ -63,6 +63,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onResponse(Call<List<Poem>> call, Response<List<Poem>> response) {
                 if (response.body() != null) {
                     poems.addAll(response.body());
+                    adapter.setPoems(poems);
                     adapter.notifyDataSetChanged();
                 }
                 hideProgress();

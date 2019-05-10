@@ -10,19 +10,19 @@ data class Poem(
 
         @Expose
         @SerializedName("username")
-        var userName: String?,
+        var userName: String,
 
         @Expose
         @SerializedName("wordFirst")
-        var wordFirst: String?,
+        var wordFirst: String,
 
         @Expose
         @SerializedName("wordSecond")
-        var wordSecond: String?,
+        var wordSecond: String,
 
         @Expose
         @SerializedName("wordThird")
-        var wordThird: String?,
+        var wordThird: String,
 
         @Expose
         @SerializedName("likeCount")

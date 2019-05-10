@@ -168,14 +168,14 @@ public class GameActivity extends AppCompatActivity {
                 false
         );
 
-        service.savePoem(poem).enqueue(new Callback<com.depromeet.data.Response>() {
+        service.savePoem(poem).enqueue(new Callback<com.depromeet.data.BasicResponse>() {
             @Override
-            public void onResponse(Call<com.depromeet.data.Response> call, Response<com.depromeet.data.Response> response) {
+            public void onResponse(Call<com.depromeet.data.BasicResponse> call, Response<com.depromeet.data.BasicResponse> response) {
 
             }
 
             @Override
-            public void onFailure(Call<com.depromeet.data.Response> call, Throwable t) {
+            public void onFailure(Call<com.depromeet.data.BasicResponse> call, Throwable t) {
 
             }
         });

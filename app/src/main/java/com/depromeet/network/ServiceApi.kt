@@ -15,7 +15,7 @@ interface ServiceApi {
     fun getRandomWord(): Call<WordResponse>
 
     @POST("hangshis/save_hangshi")
-    fun savePoem(@Body poem: Poem): Call<Response>
+    fun savePoem(@Body poem: Poem): Call<BasicResponse>
 
     @GET("hangshis/get_by_date")
     fun getByDate(@Query("page") page: Int,
