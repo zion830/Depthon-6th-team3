@@ -30,17 +30,17 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
     // HTTP 라이브러리
-    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
-    implementation 'com.squareup.okhttp3:okhttp:3.10.0'
+    implementation 'com.squareup.okhttp3:okhttp:3.12.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.9.1'
 
     // JSON 변환 라이브러리
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'com.android.support:design:28.0.0'
 
-    // GridView 라이브러리
-    implementation 'in.srain.cube:grid-view-with-header-footer:1.0.12'
+    // anko 라이브러리
+    implementation "org.jetbrains.anko:anko:0.10.8"
 
     // kotlin project
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"

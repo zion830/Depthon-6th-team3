@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 public class LoginManager {
-    private static final String sharedPrefName = "mannaja_sharedpref";
+    private static final String sharedPrefName = "samhangsi_sharedpref";
     private static final String KEY_NAME = "key_name";
     private static final String KEY_USER_ID = "key_user_id";
 

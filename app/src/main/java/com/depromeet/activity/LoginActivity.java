@@ -3,6 +3,7 @@ package com.depromeet.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -65,16 +66,14 @@ public class LoginActivity extends AppCompatActivity {
         mLoginProgress.setVisibility(View.INVISIBLE);
     }
 
-    private int status = 0, userId = 0;
-
     private void requestUserLogin(String name) {
         ServiceApi service = RetrofitBuilder.INSTANCE.getInstance();
         service.userLogin(new User(name)).enqueue(new Callback<LoginResponse>() {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 LoginResponse res = response.body();
-                status = res.getStatus();
-                userId = res.getUser().getId();
+                int status = res.getStatus();
+                int userId = res.getUser().getId();
 
                 if (status == 200) {
                     manager.userLogin(res.getUser().getName());

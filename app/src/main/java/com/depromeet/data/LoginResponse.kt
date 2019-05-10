@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName
 data class LoginResponse(
         @Expose
         @SerializedName("status")
-        val status: Int = 0,
+        val status: Int,
 
         @Expose
         @SerializedName("message")

@@ -5,4 +5,8 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+
+    <style name="ShareDialogTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:background">@color/colorDialog</item>
+    </style>
 </resources>

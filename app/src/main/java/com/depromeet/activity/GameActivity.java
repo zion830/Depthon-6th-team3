@@ -12,13 +12,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.depromeet.R;
+import com.depromeet.customView.GameResultDialog;
 import com.depromeet.data.Poem;
 import com.depromeet.data.WordResponse;
 import com.depromeet.network.RetrofitBuilder;
 import com.depromeet.network.ServiceApi;
-import com.depromeet.util.FailDialog;
 import com.depromeet.util.LoginManager;
-import com.depromeet.util.PassDialog;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -101,14 +100,13 @@ public class GameActivity extends AppCompatActivity {
                     @Override
                     public void onFinish() { //타이머 종료시 이벤트
                         // "노력해요" 팝업창
-                        final FailDialog dialog = new FailDialog(GameActivity.this);
+                        final GameResultDialog dialog = new GameResultDialog(GameActivity.this, false);
                         dialog.show();
                         // 2초후 메인화면 으로!
                         Handler handler = new Handler();
                         handler.postDelayed(new Runnable() {
                             public void run() {
                                 dialog.dismiss();
-                                finish();
                             }
                         }, 2000);
                     }
@@ -131,14 +129,13 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void showGoodDialog() {
-        final PassDialog dialog = new PassDialog(GameActivity.this);
+        final GameResultDialog dialog = new GameResultDialog(this, true);
         dialog.show();
 
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             public void run() {
                 dialog.dismiss();
-                finish();
             }
         }, 2000);
     }
