@@ -1,14 +1,12 @@
 package com.depromeet.activity
 
 import android.os.Bundle
-import android.os.CountDownTimer
-import android.os.Handler
-import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.text.TextUtils
 import com.depromeet.R
 import com.depromeet.customView.GameResultDialog
 import com.depromeet.data.Poem
+import com.depromeet.data.Word
 import com.depromeet.data.WordResponse
 import com.depromeet.network.RetrofitBuilder
 import com.depromeet.network.ServiceApi
@@ -46,9 +44,11 @@ class GameActivity : AppCompatActivity() {
     private fun showGoodDialog() {
         val dialog = GameResultDialog(this, true)
         dialog.show()
+    }
 
-        val handler = Handler()
-        handler.postDelayed({ dialog.dismiss() }, 2000)
+    private fun showBadDialog() {
+        val dialog = GameResultDialog(this, false)
+        dialog.show()
     }
 
     private fun requestRandomWord() {

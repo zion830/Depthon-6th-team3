@@ -23,9 +23,10 @@ public class LoginManager {
         return mInstance;
     }
 
-    public void userLogin(String name) {
+    public void userLogin(int id, String name) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(KEY_NAME, name);
+        editor.putInt(KEY_USER_ID, id);
         editor.apply();
     }
 
