@@ -18,4 +18,9 @@
     <string name="main_no_item">아직 삼행시가 존재하지 않습니다!</string>
 
     <string name="game_submit">제출하자</string>
+    <string name="game_ready1">준</string>
+    <string name="game_ready2">비</string>
+    <string name="game_ready3">중</string>
+    <string name="game_input">입력!</string>
+    <string name="game_not_input">비어있는 행이 있어요!</string>
 </resources>
