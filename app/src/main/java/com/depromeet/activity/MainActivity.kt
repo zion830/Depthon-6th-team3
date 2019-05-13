@@ -9,6 +9,7 @@ import com.depromeet.R
 import com.depromeet.adapter.PoemListAdapter
 import com.depromeet.data.Poem
 import com.depromeet.network.RetrofitBuilder
+import com.depromeet.util.BackPressCloseHandler
 import com.depromeet.util.LoginManager
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.textColorResource
@@ -24,6 +25,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, Callback<List<Po
     private val poems = ArrayList<Poem>()
     private var page = 0
     private var selectedBtn: Button? = null
+    private lateinit var closeHandler: BackPressCloseHandler
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +33,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, Callback<List<Po
         manager = LoginManager(this)
         selectedBtn = btn_main_latest
         initView()
+
+        closeHandler = BackPressCloseHandler(this)
     }
 
     private fun initView() {
@@ -84,10 +88,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, Callback<List<Po
 
     private fun showProgress() {
         progress_main!!.visibility = View.VISIBLE
+        fb_main_start.isClickable = false
     }
 
     private fun hideProgress() {
         progress_main!!.visibility = View.INVISIBLE
+        fb_main_start.isClickable = true
     }
 
     override fun onClick(view: View) {
@@ -96,7 +102,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, Callback<List<Po
                 val startGame = Intent(this@MainActivity, GameActivity::class.java)
                 startActivity(startGame)
             }
-
             R.id.btn_main_latest -> {
                 changeSortBtnRes(btn_main_latest)
                 requestPoems(selectedBtn)
@@ -125,4 +130,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, Callback<List<Po
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
     }
+
+    override fun onBackPressed() = closeHandler.onBackPressed()
 }

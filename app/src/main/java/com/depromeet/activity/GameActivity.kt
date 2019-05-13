@@ -126,9 +126,10 @@ class GameActivity : AppCompatActivity() {
 
         service.savePoem(poem).enqueue(object : Callback<BasicResponse> {
             override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
-                if (response.code() == 200)
+                if (response.code() == 200) {
+                    toast(R.string.game_finish)
                     showGoodDialog()
-                else {
+                } else {
                     toast(R.string.all_err)
                     finish()
                 }

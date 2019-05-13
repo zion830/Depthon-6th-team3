@@ -94,6 +94,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginBottom="10dp"
                 android:horizontalSpacing="4dp"
+                android:overScrollMode="never"
                 android:verticalSpacing="6dp"
                 app:layoutManager="android.support.v7.widget.GridLayoutManager"
                 app:spanCount="2" />
