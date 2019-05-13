@@ -23,5 +23,6 @@ interface ServiceApi {
                   @Query("userId") userId: Int): Call<List<Poem>>
 
     @GET("/user/{userId}/get_hangshi")
-    fun getMyPoems(@Path("userId") userId: Int): Call<List<Poem>>
+    fun getMyPoems(@Path("userId") userId: Int,
+                   @Query("page") page: Int): Call<List<Poem>>
 }

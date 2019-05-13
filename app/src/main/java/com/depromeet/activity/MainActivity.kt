@@ -11,7 +11,6 @@ import com.depromeet.data.Poem
 import com.depromeet.network.RetrofitBuilder
 import com.depromeet.util.LoginManager
 import kotlinx.android.synthetic.main.activity_main.*
-import org.jetbrains.anko.textColor
 import org.jetbrains.anko.textColorResource
 import org.jetbrains.anko.toast
 import retrofit2.Call
@@ -59,7 +58,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, Callback<List<Po
             btn_main_favorite ->
                 service.getByLike(page, userId).enqueue(this)
             else ->
-                service.getMyPoems(userId).enqueue(this)
+                service.getMyPoems(page, userId).enqueue(this)
         }
     }
 
@@ -111,6 +110,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, Callback<List<Po
                 requestPoems(btn_main_mine)
             }
         }
+
+        page = 0
     }
 
     private fun changeSortBtnRes(state: Button?) {

@@ -34,12 +34,6 @@ public class LoginManager {
         return sharedPreferences.getString(KEY_NAME, "");
     }
 
-    public void setUserId(int id) {
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putInt(KEY_USER_ID, id);
-        editor.apply();
-    }
-
     public int getUserId() {
         return sharedPreferences.getInt(KEY_USER_ID, 0);
     }
