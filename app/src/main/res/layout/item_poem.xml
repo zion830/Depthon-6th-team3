@@ -18,7 +18,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:text="영걸님"
+            android:ellipsize="end"
+            android:singleLine="true"
             android:textColor="@android:color/white"
             android:textStyle="bold" />
 

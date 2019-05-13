@@ -19,9 +19,8 @@
             android:id="@+id/tv_poem_title1"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_marginEnd="10dp"
+            android:layout_marginEnd="6dp"
             android:gravity="center"
-            android:text="디"
             android:textColor="@color/colorPrimary"
             android:textSize="16sp"
             android:textStyle="bold" />
@@ -32,7 +31,6 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:singleLine="true"
-            android:text="지게"
             android:textColor="@color/colorDarkerGray"
             android:textSize="16sp" />
     </LinearLayout>
@@ -48,9 +46,8 @@
             android:id="@+id/tv_poem_title2"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_marginEnd="10dp"
+            android:layout_marginEnd="6dp"
             android:gravity="center"
-            android:text="디"
             android:textColor="@color/colorPrimary"
             android:textSize="16sp"
             android:textStyle="bold" />
@@ -61,7 +58,6 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:singleLine="true"
-            android:text="프로그래밍 할 사람만 지원하세요"
             android:textColor="@color/colorDarkerGray"
             android:textSize="16sp" />
     </LinearLayout>
@@ -77,9 +73,8 @@
             android:id="@+id/tv_poem_title3"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_marginEnd="10dp"
+            android:layout_marginEnd="6dp"
             android:gravity="center"
-            android:text="디"
             android:textColor="@color/colorPrimary"
             android:textSize="16sp"
             android:textStyle="bold" />
@@ -90,7 +85,6 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:singleLine="true"
-            android:text="지게"
             android:textColor="@color/colorDarkerGray"
             android:textSize="16sp" />
     </LinearLayout>

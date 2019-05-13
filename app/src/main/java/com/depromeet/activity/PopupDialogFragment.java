@@ -1,15 +1,11 @@
 package com.depromeet.activity;
 
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
+
 import com.depromeet.R;
 
 public class PopupDialogFragment extends DialogFragment {
@@ -22,7 +18,6 @@ public class PopupDialogFragment extends DialogFragment {
         builder.setView(view);
 
         return builder.create();
-
     }
 
 }

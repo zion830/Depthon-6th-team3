@@ -23,20 +23,15 @@ public class LoginManager {
         return mInstance;
     }
 
-    public void userLogin(String name) {
+    public void userLogin(int id, String name) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(KEY_NAME, name);
+        editor.putInt(KEY_USER_ID, id);
         editor.apply();
     }
 
     public String getUserName() {
         return sharedPreferences.getString(KEY_NAME, "");
-    }
-
-    public void setUserId(int id) {
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putInt(KEY_USER_ID, id);
-        editor.apply();
     }
 
     public int getUserId() {

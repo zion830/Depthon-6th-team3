@@ -87,19 +87,18 @@
                 android:text="@string/main_no_item"
                 android:textSize="18sp"
                 android:visibility="gone" />
-        </LinearLayout>
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_main_poem"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="12dp"
-            android:layout_marginEnd="12dp"
-            android:layout_marginBottom="10dp"
-            android:horizontalSpacing="4dp"
-            android:verticalSpacing="6dp"
-            app:layoutManager="android.support.v7.widget.GridLayoutManager"
-            app:spanCount="2" />
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_main_poem"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10dp"
+                android:horizontalSpacing="4dp"
+                android:overScrollMode="never"
+                android:verticalSpacing="6dp"
+                app:layoutManager="android.support.v7.widget.GridLayoutManager"
+                app:spanCount="2" />
+        </LinearLayout>
     </LinearLayout>
 
     <FrameLayout
