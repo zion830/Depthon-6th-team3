@@ -2,10 +2,7 @@ package com.depromeet.network
 
 import com.depromeet.data.*
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface ServiceApi {
     @POST("login")
@@ -24,4 +21,7 @@ interface ServiceApi {
     @GET("hangshis/get_by_like")
     fun getByLike(@Query("page") page: Int,
                   @Query("userId") userId: Int): Call<List<Poem>>
+
+    @GET("/user/{userId}/get_hangshi")
+    fun getMyPoems(@Path("userId") userId: Int): Call<List<Poem>>
 }
