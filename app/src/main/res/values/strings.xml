@@ -17,6 +17,9 @@
     <string name="main_my_poem">내 삼행시</string>
     <string name="main_start">시작하자</string>
     <string name="main_no_item">아직 삼행시가 없습니다!</string>
+    <string name="main_rank1">1위!</string>
+    <string name="main_rank2">2위!</string>
+    <string name="main_rank3">3위!</string>
 
     <string name="game_submit">제출하자</string>
     <string name="game_ready1">준</string>

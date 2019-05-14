@@ -27,7 +27,7 @@ import retrofit2.Response
 class GameActivity : AppCompatActivity() {
     private val interval = 1000L
     private var waiting = 3L
-    private var limitTime = 6L
+    private var limitTime = 60L
     private var word = "삼행시"
     private lateinit var manager: LoginManager
     private lateinit var service: ServiceApi
