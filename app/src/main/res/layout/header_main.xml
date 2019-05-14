@@ -20,55 +20,99 @@
             android:gravity="center|bottom"
             android:orientation="horizontal">
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="20dp"
-                android:gravity="center"
-                android:orientation="vertical">
+                android:layout_height="match_parent"
+                android:layout_marginEnd="20dp">
 
-                <LinearLayout
+                <TextView
+                    android:id="@+id/tv_rank_2nd"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
-                    android:gravity="bottom"
-                    android:orientation="horizontal">
+                    android:layout_above="@id/ib_main_2nd"
+                    android:layout_marginStart="3dp"
+                    android:layout_marginBottom="3dp"
+                    android:background="@drawable/ic_rank_back"
+                    android:gravity="center"
+                    android:paddingBottom="5dp"
+                    android:text="@string/main_rank2"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="8sp"
+                    android:visibility="invisible" />
 
-                    <ImageButton
-                        android:id="@+id/ib_main_1st"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="4dp"
-                        android:background="@android:color/transparent"
-                        android:src="@drawable/ic_rank_2nd" />
+                <ImageButton
+                    android:id="@+id/ib_main_2nd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@id/tv_main_rank_name"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginEnd="4dp"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/ic_rank_2nd" />
 
-                    <ImageButton
-                        android:id="@+id/ib_main_2nd"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="4dp"
-                        android:background="@android:color/transparent"
-                        android:src="@drawable/ic_rank_1st_select" />
+                <TextView
+                    android:id="@+id/tv_rank_1st"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@id/ib_main_1st"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginStart="3dp"
+                    android:layout_marginBottom="3dp"
+                    android:layout_toEndOf="@id/ib_main_2nd"
+                    android:background="@drawable/ic_rank_back"
+                    android:gravity="center"
+                    android:paddingBottom="5dp"
+                    android:text="@string/main_rank1"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="8sp" />
 
-                    <ImageButton
-                        android:id="@+id/ib_main_3rd"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@android:color/transparent"
-                        android:src="@drawable/ic_rank_3rd" />
-                </LinearLayout>
+                <ImageButton
+                    android:id="@+id/ib_main_1st"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@id/tv_main_rank_name"
+                    android:layout_marginEnd="4dp"
+                    android:layout_toEndOf="@id/ib_main_2nd"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/ic_rank_1st_select" />
+
+                <TextView
+                    android:id="@+id/tv_rank_3rd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@id/ib_main_3rd"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginBottom="3dp"
+                    android:layout_toEndOf="@id/ib_main_1st"
+                    android:background="@drawable/ic_rank_back"
+                    android:gravity="center"
+                    android:paddingBottom="5dp"
+                    android:text="@string/main_rank3"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="8sp"
+                    android:visibility="invisible" />
+
+                <ImageButton
+                    android:id="@+id/ib_main_3rd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@id/tv_main_rank_name"
+                    android:layout_toEndOf="@id/ib_main_1st"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/ic_rank_3rd" />
 
                 <TextView
                     android:id="@+id/tv_main_rank_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
                     android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:text="영걸님"
+                    android:text="영걸 님"
                     android:textColor="@android:color/black"
                     android:textSize="12sp"
                     android:textStyle="bold" />
-            </LinearLayout>
+            </RelativeLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"

@@ -17,6 +17,9 @@
     <string name="main_my_poem">내 삼행시</string>
     <string name="main_start">시작하자</string>
     <string name="main_no_item">아직 삼행시가 없습니다!</string>
+    <string name="main_rank1">1위!</string>
+    <string name="main_rank2">2위!</string>
+    <string name="main_rank3">3위!</string>
 
     <string name="game_submit">제출하자</string>
     <string name="game_ready1">준</string>
@@ -25,4 +28,5 @@
     <string name="game_input">입력!</string>
     <string name="game_not_input">비어있는 행이 있어요!</string>
     <string name="game_finish">삼행시 제출 완료!</string>
+    <string name="game_back">아직 삼행시 작성이 진행 중이예요. 종료하시겠어요?</string>
 </resources>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="120dp"
     android:layout_marginEnd="8dp"
@@ -23,7 +24,6 @@
             android:layout_marginEnd="10dp"
             android:background="@drawable/circle_fill_white"
             android:gravity="center"
-            android:text="디"
             android:textColor="@color/colorAccent"
             android:textSize="16sp"
             android:textStyle="bold" />
@@ -34,7 +34,6 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:singleLine="true"
-            android:text="지게"
             android:textColor="@android:color/white"
             android:textSize="16sp" />
     </LinearLayout>
@@ -53,7 +52,6 @@
             android:layout_marginEnd="10dp"
             android:background="@drawable/circle_fill_white"
             android:gravity="center"
-            android:text="디"
             android:textColor="@color/colorAccent"
             android:textSize="16sp"
             android:textStyle="bold" />
@@ -64,7 +62,6 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:singleLine="true"
-            android:text="프로그래밍 할 사람만 지원하세요"
             android:textColor="@android:color/white"
             android:textSize="16sp" />
     </LinearLayout>
@@ -83,7 +80,6 @@
             android:layout_marginEnd="10dp"
             android:background="@drawable/circle_fill_white"
             android:gravity="center"
-            android:text="디"
             android:textColor="@color/colorAccent"
             android:textSize="16sp"
             android:textStyle="bold" />
@@ -94,7 +90,6 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:singleLine="true"
-            android:text="지게"
             android:textColor="@android:color/white"
             android:textSize="16sp" />
     </LinearLayout>
