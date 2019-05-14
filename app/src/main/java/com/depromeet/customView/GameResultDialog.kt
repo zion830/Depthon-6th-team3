@@ -4,9 +4,9 @@ package com.depromeet.customView
 import android.app.Activity
 import android.app.Dialog
 import android.content.Context
+import android.content.ContextWrapper
 import android.os.Bundle
 import android.view.MotionEvent
-import android.view.View
 import android.view.Window
 import com.depromeet.R
 import kotlinx.android.synthetic.main.dialog_pass.*
@@ -28,14 +28,24 @@ class GameResultDialog(context: Context, private val isPassed: Boolean)
         iv_game_pass.setImageResource(
                 if (isPassed) R.drawable.img_pass else R.drawable.img_fail)
 
-        layout_dialog_back.setOnTouchListener(object : View.OnTouchListener {
-            override fun onTouch(v: View, m: MotionEvent): Boolean {
-                if (m.action == MotionEvent.ACTION_UP) {
-                    dismiss()
-                    (context as Activity).finish()
-                }
-                return true
+        layout_dialog_back.setOnTouchListener { _, event ->
+            if (event.action == MotionEvent.ACTION_UP) {
+                dismiss()
+                getActivity(context).finish()
             }
-        })
+            true
+        }
+    }
+
+    private fun getActivity(context: Context): Activity {
+        return when (context) {
+            is Activity -> context
+            is ContextWrapper -> getActivity(context.baseContext)
+            else -> error("Non Activity based context")
+        }
+    }
+
+    override fun onBackPressed() {
+        getActivity(context).finish()
     }
 }

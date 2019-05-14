@@ -9,13 +9,16 @@ import android.view.inputmethod.InputMethodManager
 import com.depromeet.R
 import com.depromeet.customView.GameResultDialog
 import com.depromeet.data.BasicResponse
-import com.depromeet.data.Poem
+import com.depromeet.data.PoemRequest
 import com.depromeet.data.WordResponse
 import com.depromeet.network.RetrofitBuilder
 import com.depromeet.network.ServiceApi
 import com.depromeet.util.LoginManager
 import kotlinx.android.synthetic.main.activity_game.*
+import org.jetbrains.anko.alert
+import org.jetbrains.anko.noButton
 import org.jetbrains.anko.toast
+import org.jetbrains.anko.yesButton
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -24,7 +27,7 @@ import retrofit2.Response
 class GameActivity : AppCompatActivity() {
     private val interval = 1000L
     private var waiting = 3L
-    private var limitTime = 60L
+    private var limitTime = 6L
     private var word = "삼행시"
     private lateinit var manager: LoginManager
     private lateinit var service: ServiceApi
@@ -60,8 +63,8 @@ class GameActivity : AppCompatActivity() {
     private fun initTimers() {
         gameTimer = object : CountDownTimer(limitTime * interval, interval) {
             override fun onTick(millisUntilFinished: Long) {
-                tv_game_timer.text = limitTime.toString()
                 limitTime--
+                tv_game_timer.text = limitTime.toString()
             }
 
             override fun onFinish() {
@@ -71,8 +74,8 @@ class GameActivity : AppCompatActivity() {
 
         initTimer = object : CountDownTimer(waiting * interval, interval) {
             override fun onTick(millisUntilFinished: Long) {
-                tv_game_board.text = waiting.toString()
                 waiting--
+                tv_game_board.text = waiting.toString()
             }
 
             override fun onFinish() {
@@ -121,8 +124,8 @@ class GameActivity : AppCompatActivity() {
     }
 
     private fun requestSavePoem() {
-        val poem = Poem(manager.userId, manager.userName, et_game_word1.text.toString(),
-                et_game_word2.text.toString(), et_game_word3.text.toString(), 0, false)
+        val poem = PoemRequest(manager.userName, et_game_word1.text.toString(),
+                et_game_word2.text.toString(), et_game_word3.text.toString())
 
         service.savePoem(poem).enqueue(object : Callback<BasicResponse> {
             override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
@@ -139,6 +142,17 @@ class GameActivity : AppCompatActivity() {
                 toast(R.string.all_err)
             }
         })
+    }
+
+    override fun onBackPressed() {
+        if (limitTime > 0) {
+            alert(R.string.game_back) {
+                yesButton { super.onBackPressed() }
+                noButton {  }
+            }.show()
+        } else {
+            super.onBackPressed()
+        }
     }
 
     override fun onDestroy() {

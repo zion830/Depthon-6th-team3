@@ -23,9 +23,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, Callback<List<Po
     private var adapter: PoemListAdapter? = null
     private var manager: LoginManager? = null
     private val poems = ArrayList<Poem>()
-    private var page = 0
     private var selectedBtn: Button? = null
     private lateinit var closeHandler: BackPressCloseHandler
+    private var page = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,7 +62,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, Callback<List<Po
             btn_main_favorite ->
                 service.getByLike(page, userId).enqueue(this)
             else ->
-                service.getMyPoems(page, userId).enqueue(this)
+                service.getMyPoems(userId, page).enqueue(this)
         }
     }
 
