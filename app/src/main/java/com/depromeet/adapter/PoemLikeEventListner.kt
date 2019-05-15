@@ -1,4 +1,5 @@
 package com.depromeet.adapter
 
-interface PoemLikeEventListner {
+interface PoemLikeEventListener {
+    fun onLikeBtnClickListener(poemId: Int, userId: Int, isLike: Boolean)
 }

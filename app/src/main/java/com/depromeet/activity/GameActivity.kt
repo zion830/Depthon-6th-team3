@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity
 import android.text.TextUtils
 import android.view.inputmethod.InputMethodManager
 import com.depromeet.R
-import com.depromeet.customView.GameResultDialog
+import com.depromeet.util.GameResultDialog
 import com.depromeet.data.BasicResponse
 import com.depromeet.data.PoemRequest
 import com.depromeet.data.WordResponse

@@ -8,6 +8,7 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
 import com.depromeet.R
+import com.depromeet.adapter.PoemLikeEventListener
 import com.depromeet.adapter.PoemListAdapter
 import com.depromeet.data.Poem
 import com.depromeet.network.RetrofitBuilder
@@ -23,7 +24,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.util.*
 
-class MainActivity : AppCompatActivity(), View.OnClickListener, Callback<List<Poem>> {
+class MainActivity : AppCompatActivity(), View.OnClickListener, Callback<List<Poem>>, PoemLikeEventListener {
     private val START_GAME = 1
     private val poems = ArrayList<Poem>()
     private lateinit var adapter: PoemListAdapter
@@ -48,7 +49,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, Callback<List<Po
     }
 
     private fun initView() {
-        val header = layoutInflater.inflate(R.layout.header_main, null, false)
         adapter = PoemListAdapter()
         rv_main_poem.adapter = adapter
 
@@ -95,6 +95,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, Callback<List<Po
         hideProgress()
     }
 
+    override fun onLikeBtnClickListener(poemId: Int, userId: Int, isLike: Boolean) {
+        TODO("좋아요, 싫어요 이벤트")
+    }
+
     private fun showNoItemMsg(isEmpty: Boolean) {
         tv_main_no_item.visibility = if (isEmpty) View.VISIBLE else View.GONE
     }
@@ -115,30 +119,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, Callback<List<Po
                 val startGame = Intent(this@MainActivity, GameActivity::class.java)
                 startActivityForResult(startGame, START_GAME)
             }
-            R.id.btn_main_latest -> {
-                changeSortBtnRes(btn_main_latest)
-                requestPoems(selectedSortBtn)
-                page = 0
-            }
-            R.id.btn_main_favorite -> {
-                changeSortBtnRes(btn_main_favorite)
-                requestPoems(btn_main_favorite)
-                page = 0
-            }
-            R.id.btn_main_mine -> {
-                changeSortBtnRes(btn_main_mine)
-                requestPoems(btn_main_mine)
-                page = 0
-            }
-            R.id.ib_main_1st -> {
-                toggleRankBtnRes(0)
-            }
-            R.id.ib_main_2nd -> {
-                toggleRankBtnRes(1)
-            }
-            R.id.ib_main_3rd -> {
-                toggleRankBtnRes(2)
-            }
+            R.id.btn_main_latest -> changeSortBtnRes(btn_main_latest)
+            R.id.btn_main_favorite -> changeSortBtnRes(btn_main_favorite)
+            R.id.btn_main_mine -> changeSortBtnRes(btn_main_mine)
+            R.id.ib_main_1st -> toggleRankBtnRes(0)
+            R.id.ib_main_2nd -> toggleRankBtnRes(1)
+            R.id.ib_main_3rd -> toggleRankBtnRes(2)
         }
     }
 
@@ -159,6 +145,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, Callback<List<Po
     }
 
     private fun changeSortBtnRes(state: Button) {
+        requestPoems(state)
+        page = 0
+
         selectedSortBtn.setBackgroundResource(R.drawable.back_stoke_green2)
         selectedSortBtn.textColorResource = R.color.colorDarkerGray
         selectedSortBtn = state

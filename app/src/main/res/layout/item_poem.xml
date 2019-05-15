@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/layout_poem"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -7,7 +8,7 @@
     android:background="@drawable/item_poem_back"
     android:orientation="vertical">
 
-    <RelativeLayout
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/item_poem_title_back"
@@ -17,11 +18,13 @@
             android:id="@+id/tv_poem_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
             android:ellipsize="end"
             android:singleLine="true"
             android:textColor="@android:color/white"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/btn_poem_like"
@@ -35,9 +38,11 @@
             android:minHeight="0dp"
             android:paddingStart="40dp"
             android:text="0"
-            android:textColor="@android:color/white" />
-
-    </RelativeLayout>
+            android:textColor="@android:color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </android.support.constraint.ConstraintLayout>
 
     <include layout="@layout/layout_main_item_poem" />
 </LinearLayout>

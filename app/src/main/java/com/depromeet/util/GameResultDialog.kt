@@ -1,4 +1,4 @@
-package com.depromeet.customView
+package com.depromeet.util
 
 
 import android.app.Activity
