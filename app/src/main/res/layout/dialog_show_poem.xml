@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/layout_poem"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="4dp"
-    android:background="@drawable/item_poem_back"
-    android:orientation="vertical">
+    android:layout_height="match_parent"
+    android:background="@color/colorDialog"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingStart="20dp"
+    android:paddingEnd="20dp">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
@@ -44,5 +45,5 @@
             app:layout_constraintTop_toTopOf="parent" />
     </android.support.constraint.ConstraintLayout>
 
-    <include layout="@layout/layout_main_item_poem" />
+    <include layout="@layout/layout_show_poem" />
 </LinearLayout>
