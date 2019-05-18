@@ -12,10 +12,14 @@ import com.depromeet.adapter.PoemLikeEventListener
 import com.depromeet.adapter.PoemListAdapter
 import com.depromeet.data.Poem
 import com.depromeet.network.RetrofitBuilder
+import com.depromeet.network.ServiceApi
 import com.depromeet.util.BackPressCloseHandler
 import com.depromeet.util.LoginManager
+import com.depromeet.util.PoemDetailDialog
+import com.depromeet.util.RecyclerItemClickListener
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.header_main.*
+import kotlinx.android.synthetic.main.layout_main_item_poem.*
 import org.jetbrains.anko.imageResource
 import org.jetbrains.anko.textColorResource
 import org.jetbrains.anko.toast
@@ -30,16 +34,18 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, Callback<List<Po
     private lateinit var adapter: PoemListAdapter
     private lateinit var manager: LoginManager
     private lateinit var selectedSortBtn: Button
-    private var selectedRankBtn: Int = 0
+    private var selectedRank: Int = 0
     private lateinit var rankBtns: ArrayList<ImageButton>
     private lateinit var rankTexts: ArrayList<TextView>
     private lateinit var closeHandler: BackPressCloseHandler
     private var page = 0
+    private lateinit var service: ServiceApi
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         manager = LoginManager(this)
+        service = RetrofitBuilder.getInstance()
         selectedSortBtn = btn_main_latest
         rankBtns = arrayListOf(ib_main_1st, ib_main_2nd, ib_main_3rd)
         rankTexts = arrayListOf(tv_rank_1st, tv_rank_2nd, tv_rank_3rd)
@@ -55,7 +61,16 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, Callback<List<Po
         fb_main_start.setOnClickListener(this)
         showProgress()
         requestPoems(btn_main_latest)
+        getPrizedPoem(selectedRank)
 
+        rv_main_poem.addOnItemTouchListener(
+                RecyclerItemClickListener(this, rv_main_poem,
+                        object : RecyclerItemClickListener.OnItemClickListener {
+                            override fun onItemClick(view: View, position: Int) {
+                                showPoemDetailDialog(position)
+                            }
+                        })
+        )
         btn_main_latest.setOnClickListener(this)
         btn_main_favorite.setOnClickListener(this)
         btn_main_mine.setOnClickListener(this)
@@ -64,43 +79,25 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, Callback<List<Po
         ib_main_3rd.setOnClickListener(this)
     }
 
-    private fun requestPoems(state: Button?) {
-        val userId = manager.userId
-        val service = RetrofitBuilder.getInstance()
-        adapter.clear()
+    private fun setPoemToBoard(name: String, poem: Poem) {
+        tv_main_rank_name.text = "$name 님"
+        tv_main_rank_like.text = poem.likeCount.toString()
 
-        when (state) {
-            btn_main_latest ->
-                service.getByDate(page, userId).enqueue(this)
-            btn_main_favorite ->
-                service.getByLike(page, userId).enqueue(this)
-            else ->
-                service.getMyPoems(userId, page).enqueue(this)
-        }
-    }
-
-    override fun onResponse(call: Call<List<Poem>>, response: Response<List<Poem>>) {
-        if (response.body() != null) {
-            poems.addAll(response.body()!!)
-            showNoItemMsg(poems.size == 0)
-
-            adapter.poems = poems
-            adapter.notifyDataSetChanged()
-        }
-        hideProgress()
-    }
-
-    override fun onFailure(call: Call<List<Poem>>, t: Throwable) {
-        toast(R.string.all_err)
-        hideProgress()
-    }
-
-    override fun onLikeBtnClickListener(poemId: Int, userId: Int, isLike: Boolean) {
-        TODO("좋아요, 싫어요 이벤트")
+        tv_poem_title1.text = poem.wordFirst.substring(0, 1)
+        tv_poem_title2.text = poem.wordSecond.substring(0, 1)
+        tv_poem_title3.text = poem.wordThird.substring(0, 1)
+        tv_poem_content1.text = poem.wordFirst
+        tv_poem_content2.text = poem.wordSecond
+        tv_poem_content3.text = poem.wordThird
     }
 
     private fun showNoItemMsg(isEmpty: Boolean) {
         tv_main_no_item.visibility = if (isEmpty) View.VISIBLE else View.GONE
+    }
+
+    private fun showPoemDetailDialog(position: Int) {
+        val dialog = PoemDetailDialog(this, adapter.getItem(position))
+        dialog.show()
     }
 
     private fun showProgress() {
@@ -128,13 +125,14 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, Callback<List<Po
         }
     }
 
-    private fun toggleRankBtnRes(index: Int) {
-        if (index != selectedRankBtn) {
-            rankBtns[selectedRankBtn].imageResource = getRankBarResId(selectedRankBtn, false)
-            rankTexts[selectedRankBtn].visibility = View.INVISIBLE
-            selectedRankBtn = index
+    private fun toggleRankBtnRes(index: Int) { // 1-3위 랭킹 버튼 이미지 리소스 변경
+        if (index != selectedRank) {
+            rankBtns[selectedRank].imageResource = getRankBarResId(selectedRank, false)
+            rankTexts[selectedRank].visibility = View.INVISIBLE
+            selectedRank = index
             rankBtns[index].imageResource = getRankBarResId(index, true)
             rankTexts[index].visibility = View.VISIBLE
+            getPrizedPoem(selectedRank)
         }
     }
 
@@ -153,6 +151,55 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, Callback<List<Po
         selectedSortBtn = state
         selectedSortBtn.setBackgroundResource(R.drawable.back_fill_red)
         selectedSortBtn.textColorResource = R.color.colorWhite
+    }
+
+    private fun requestPoems(state: Button?) {
+        val userId = manager.userId
+        adapter.clear()
+
+        when (state) {
+            btn_main_latest ->
+                service.getByDate(page, userId).enqueue(this)
+            btn_main_favorite ->
+                service.getByLike(page, userId).enqueue(this)
+            else ->
+                service.getMyPoems(userId, page).enqueue(this)
+        }
+    }
+
+    private fun getPrizedPoem(rank: Int) {
+        if (selectedSortBtn == btn_main_favorite) {
+            setPoemToBoard(manager.userName, adapter.getItem(rank))
+        } else {
+            service.getByLike(0, manager.userId).enqueue(object : Callback<List<Poem>> {
+                override fun onResponse(call: Call<List<Poem>>, response: Response<List<Poem>>) {
+                    setPoemToBoard(manager.userName, (response.body())!![rank])
+                }
+
+                override fun onFailure(call: Call<List<Poem>>, t: Throwable) {
+                    toast(R.string.all_rank_err)
+                }
+            })
+        }
+    }
+
+    override fun onResponse(call: Call<List<Poem>>, response: Response<List<Poem>>) {
+        if (response.body() != null) {
+            poems.addAll(response.body()!!)
+            showNoItemMsg(poems.size == 0)
+
+            adapter.poems = poems
+            adapter.notifyDataSetChanged()
+        }
+        hideProgress()
+    }
+
+    override fun onFailure(call: Call<List<Poem>>, t: Throwable) {
+        toast(R.string.all_err)
+        hideProgress()
+    }
+
+    override fun onLikeBtnClickListener(poemId: Int, userId: Int, isLike: Boolean) {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

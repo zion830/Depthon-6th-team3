@@ -15,6 +15,8 @@ class PoemListAdapter : RecyclerView.Adapter<PoemListAdapter.PoemListViewHolder>
         poems.add(poem)
     }
 
+    fun getItem(index: Int): Poem = poems[index]
+
     fun clear() {
         poems.clear()
     }
@@ -45,9 +47,9 @@ class PoemListAdapter : RecyclerView.Adapter<PoemListAdapter.PoemListViewHolder>
             titleText2.text = data.wordSecond.substring(0, 1)
             titleText3.text = data.wordThird.substring(0, 1)
 
-            contentText1.text = data.wordFirst.substring(1)
-            contentText2.text = data.wordSecond.substring(1)
-            contentText3.text = data.wordThird.substring(1)
+            contentText1.text = data.wordFirst
+            contentText2.text = data.wordSecond
+            contentText3.text = data.wordThird
         }
     }
 }

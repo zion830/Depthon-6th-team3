@@ -9,4 +9,8 @@
     <style name="ShareDialogTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:background">@color/colorDialog</item>
     </style>
+
+    <style name="PoemDetailDialog" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:background">#30ffd6d3</item>
+    </style>
 </resources>
