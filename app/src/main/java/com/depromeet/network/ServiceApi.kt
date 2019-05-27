@@ -25,4 +25,10 @@ interface ServiceApi {
     @GET("/user/{userId}/get_hangshi")
     fun getMyPoems(@Path("userId") userId: Int,
                    @Query("page") page: Int): Call<List<Poem>>
+
+    @POST("/hangshis/like")
+    fun increaseLike(@Body item: LikeRequest): Call<BasicResponse>
+
+    @POST("/hangshis/unlike")
+    fun decreaseLike(@Body item: LikeRequest): Call<BasicResponse>
 }

@@ -1,18 +1,22 @@
 package com.depromeet.activity
 
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.support.v7.app.AppCompatActivity
 import android.text.TextUtils
 import android.view.inputmethod.InputMethodManager
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.target.SimpleTarget
+import com.bumptech.glide.request.transition.Transition
 import com.depromeet.R
-import com.depromeet.util.GameResultDialog
 import com.depromeet.data.BasicResponse
 import com.depromeet.data.PoemRequest
 import com.depromeet.data.WordResponse
 import com.depromeet.network.RetrofitBuilder
 import com.depromeet.network.ServiceApi
+import com.depromeet.util.GameResultDialog
 import com.depromeet.util.LoginManager
 import kotlinx.android.synthetic.main.activity_game.*
 import org.jetbrains.anko.alert
@@ -41,9 +45,19 @@ class GameActivity : AppCompatActivity() {
         service = RetrofitBuilder.getInstance()
         requestRandomWord()
 
+        Thread().run { initImg() }
         initView()
         initTimers()
         initTimer.start()
+    }
+
+    private fun initImg() {
+        Glide.with(this).load(R.drawable.ic_timer_clock).into(iv_game_timer)
+        Glide.with(this).load(R.drawable.back_quiz_main).into(object : SimpleTarget<Drawable>() {
+            override fun onResourceReady(resource: Drawable, transition: Transition<in Drawable>?) {
+                layout_game_back.background = resource
+            }
+        })
     }
 
     private fun initView() {
@@ -148,7 +162,7 @@ class GameActivity : AppCompatActivity() {
         if (limitTime > 0) {
             alert(R.string.game_back) {
                 yesButton { super.onBackPressed() }
-                noButton {  }
+                noButton { }
             }.show()
         } else {
             super.onBackPressed()
