@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.Toast
+import com.bumptech.glide.Glide
 import com.depromeet.R
 import com.depromeet.data.LoginResponse
 import com.depromeet.data.User
@@ -22,10 +23,17 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         manager = LoginManager(this)
+
+        Thread().run { initImg() }
         initView()
 
         if (manager!!.isLoggedIn)
             startMainActivity()
+    }
+
+    private fun initImg() {
+        Glide.with(this).load(R.drawable.img_logo).into(iv_login_logo)
+        Glide.with(this).load(R.drawable.img_login).into(iv_login_people)
     }
 
     private fun initView() {

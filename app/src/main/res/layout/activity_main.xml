@@ -16,90 +16,101 @@
         android:scaleType="fitCenter"
         android:src="@drawable/back_main" />
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/tv_main_no_item"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:gravity="center"
+        android:text="@string/main_no_item"
+        android:textSize="18sp"
+        android:visibility="gone" />
 
-        <include layout="@layout/header_main" />
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-        <LinearLayout
+        <android.support.v7.widget.RecyclerView
+            android:layout_marginStart="14dp"
+            android:layout_marginEnd="14dp"
+            android:layout_marginTop="50dp"
+            android:id="@+id/rv_main_poem"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:orientation="vertical">
+            android:layout_marginBottom="10dp"
+            android:horizontalSpacing="4dp"
+            android:overScrollMode="never"
+            android:verticalSpacing="6dp"
+            app:layoutManager="android.support.v7.widget.GridLayoutManager"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            app:spanCount="2" />
 
-            <LinearLayout
+
+        <LinearLayout
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_main_latest"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"
+                android:background="@drawable/back_fill_red"
+                android:elevation="0dp"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                android:padding="7dp"
+                android:text="@string/main_latest"
+                android:textColor="@android:color/white" />
+
+            <Button
+                android:id="@+id/btn_main_favorite"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"
+                android:background="@drawable/back_stoke_green2"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                android:padding="7dp"
+                android:text="@string/main_favorite"
+                android:textColor="@color/colorDarkerGray" />
+
+            <Button
+                android:id="@+id/btn_main_mine"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"
+                android:background="@drawable/back_stoke_green2"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                android:padding="7dp"
+                android:text="@string/main_my_poem"
+                android:textColor="@color/colorDarkerGray" />
+        </LinearLayout>
+
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white">
+
+            <android.support.design.widget.CollapsingToolbarLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="44dp"
-                android:orientation="horizontal"
-                android:paddingBottom="14dp">
+                app:contentInsetStart="0dp"
+                app:layout_scrollFlags="scroll|enterAlways|snap">
 
-                <Button
-                    android:id="@+id/btn_main_latest"
-                    style="?android:attr/borderlessButtonStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="12dp"
-                    android:background="@drawable/back_fill_red"
-                    android:elevation="0dp"
-                    android:minWidth="0dp"
-                    android:minHeight="0dp"
-                    android:padding="7dp"
-                    android:text="@string/main_latest"
-                    android:textColor="@android:color/white" />
+                <include
+                    layout="@layout/header_main"
+                    app:layout_collapseMode="parallax" />
 
-                <Button
-                    android:id="@+id/btn_main_favorite"
-                    style="?android:attr/borderlessButtonStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="12dp"
-                    android:background="@drawable/back_stoke_green2"
-                    android:minWidth="0dp"
-                    android:minHeight="0dp"
-                    android:padding="7dp"
-                    android:text="@string/main_favorite"
-                    android:textColor="@color/colorDarkerGray" />
-
-                <Button
-                    android:id="@+id/btn_main_mine"
-                    style="?android:attr/borderlessButtonStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="12dp"
-                    android:background="@drawable/back_stoke_green2"
-                    android:minWidth="0dp"
-                    android:minHeight="0dp"
-                    android:padding="7dp"
-                    android:text="@string/main_my_poem"
-                    android:textColor="@color/colorDarkerGray" />
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/tv_main_no_item"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="50dp"
-                android:gravity="center"
-                android:text="@string/main_no_item"
-                android:textSize="18sp"
-                android:visibility="gone" />
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rv_main_poem"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="10dp"
-                android:horizontalSpacing="4dp"
-                android:overScrollMode="never"
-                android:verticalSpacing="6dp"
-                app:layoutManager="android.support.v7.widget.GridLayoutManager"
-                app:spanCount="2" />
-        </LinearLayout>
-    </LinearLayout>
+            </android.support.design.widget.CollapsingToolbarLayout>
+        </android.support.design.widget.AppBarLayout>
+    </android.support.design.widget.CoordinatorLayout>
 
     <FrameLayout
         android:layout_width="wrap_content"

@@ -32,14 +32,12 @@
                 android:layout_width="120dp"
                 android:layout_height="120dp"
                 android:layout_marginEnd="10dp"
-                android:scaleType="fitCenter"
-                android:src="@drawable/img_logo" />
+                android:scaleType="fitCenter" />
 
             <ImageView
                 android:id="@+id/iv_login_people"
                 android:layout_width="148dp"
-                android:layout_height="170dp"
-                android:src="@drawable/img_login" />
+                android:layout_height="170dp" />
         </LinearLayout>
 
         <FrameLayout
