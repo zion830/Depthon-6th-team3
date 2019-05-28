@@ -29,68 +29,27 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.v7.widget.RecyclerView
-            android:layout_marginStart="14dp"
-            android:layout_marginEnd="14dp"
-            android:layout_marginTop="50dp"
-            android:id="@+id/rv_main_poem"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="10dp"
-            android:horizontalSpacing="4dp"
-            android:overScrollMode="never"
-            android:verticalSpacing="6dp"
-            app:layoutManager="android.support.v7.widget.GridLayoutManager"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            app:spanCount="2" />
-
-
         <LinearLayout
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="vertical"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            <Button
-                android:id="@+id/btn_main_latest"
-                style="?android:attr/borderlessButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="12dp"
-                android:background="@drawable/back_fill_red"
-                android:elevation="0dp"
-                android:minWidth="0dp"
-                android:minHeight="0dp"
-                android:padding="7dp"
-                android:text="@string/main_latest"
-                android:textColor="@android:color/white" />
+            <include layout="@layout/header_main_btns" />
 
-            <Button
-                android:id="@+id/btn_main_favorite"
-                style="?android:attr/borderlessButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="12dp"
-                android:background="@drawable/back_stoke_green2"
-                android:minWidth="0dp"
-                android:minHeight="0dp"
-                android:padding="7dp"
-                android:text="@string/main_favorite"
-                android:textColor="@color/colorDarkerGray" />
-
-            <Button
-                android:id="@+id/btn_main_mine"
-                style="?android:attr/borderlessButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="12dp"
-                android:background="@drawable/back_stoke_green2"
-                android:minWidth="0dp"
-                android:minHeight="0dp"
-                android:padding="7dp"
-                android:text="@string/main_my_poem"
-                android:textColor="@color/colorDarkerGray" />
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_main_poem"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="14dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="14dp"
+                android:layout_marginBottom="10dp"
+                android:horizontalSpacing="4dp"
+                android:overScrollMode="never"
+                android:verticalSpacing="6dp"
+                app:layoutManager="android.support.v7.widget.GridLayoutManager"
+                app:spanCount="2" />
         </LinearLayout>
 
         <android.support.design.widget.AppBarLayout
