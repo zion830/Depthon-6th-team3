@@ -2,7 +2,6 @@ package com.depromeet.adapter
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +9,6 @@ import android.widget.ImageButton
 import android.widget.TextView
 import com.depromeet.R
 import com.depromeet.data.Poem
-
 
 
 class PoemListAdapter(context: Context) : RecyclerView.Adapter<PoemListAdapter.PoemListViewHolder>() {
@@ -53,12 +51,12 @@ class PoemListAdapter(context: Context) : RecyclerView.Adapter<PoemListAdapter.P
     inner class PoemListViewHolder(private var view: View) : RecyclerView.ViewHolder(view) {
         fun bind(data: Poem) {
             val userNameText = view.findViewById<View>(R.id.tv_poem_name) as TextView
-            val titleText1 = view.findViewById<View>(R.id.tv_poem_title1) as TextView
-            val titleText2 = view.findViewById<View>(R.id.tv_poem_title2) as TextView
-            val titleText3 = view.findViewById<View>(R.id.tv_poem_title3) as TextView
-            val contentText1 = view.findViewById<View>(R.id.tv_poem_content1) as TextView
-            val contentText2 = view.findViewById<View>(R.id.tv_poem_content2) as TextView
-            val contentText3 = view.findViewById<View>(R.id.tv_poem_content3) as TextView
+            val titleText1 = view.findViewById<View>(R.id.tv_main_title1) as TextView
+            val titleText2 = view.findViewById<View>(R.id.tv_main_title2) as TextView
+            val titleText3 = view.findViewById<View>(R.id.tv_main_title3) as TextView
+            val contentText1 = view.findViewById<View>(R.id.tv_main_content1) as TextView
+            val contentText2 = view.findViewById<View>(R.id.tv_main_content2) as TextView
+            val contentText3 = view.findViewById<View>(R.id.tv_main_content3) as TextView
             val likeCountText = view.findViewById<View>(R.id.tv_poem_like) as TextView
             val likeImageButton = view.findViewById<View>(R.id.ib_poem_like) as? ImageButton
 

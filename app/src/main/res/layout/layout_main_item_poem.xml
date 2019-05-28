@@ -16,7 +16,7 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/tv_poem_title1"
+            android:id="@+id/tv_main_title1"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginEnd="6dp"
@@ -26,7 +26,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/tv_poem_content1"
+            android:id="@+id/tv_main_content1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ellipsize="end"
@@ -43,7 +43,7 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/tv_poem_title2"
+            android:id="@+id/tv_main_title2"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginEnd="6dp"
@@ -53,7 +53,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/tv_poem_content2"
+            android:id="@+id/tv_main_content2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ellipsize="end"
@@ -70,7 +70,7 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/tv_poem_title3"
+            android:id="@+id/tv_main_title3"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginEnd="6dp"
@@ -80,7 +80,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/tv_poem_content3"
+            android:id="@+id/tv_main_content3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ellipsize="end"

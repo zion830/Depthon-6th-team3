@@ -24,7 +24,8 @@ import com.depromeet.util.RecyclerItemClickListener
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.dialog_show_poem.*
 import kotlinx.android.synthetic.main.header_main.*
-import kotlinx.android.synthetic.main.layout_main_item_poem.*
+import kotlinx.android.synthetic.main.header_main_btns.*
+import kotlinx.android.synthetic.main.layout_main_rank_poem.*
 import org.jetbrains.anko.imageResource
 import org.jetbrains.anko.textColorResource
 import org.jetbrains.anko.toast
@@ -35,7 +36,6 @@ import java.util.*
 
 class MainActivity : AppCompatActivity(), View.OnClickListener, Callback<List<Poem>> {
     private val START_GAME = 1
-    private val poems = ArrayList<Poem>()
     private lateinit var adapter: PoemListAdapter
     private lateinit var manager: LoginManager
     private lateinit var selectedSortBtn: Button
@@ -107,12 +107,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, Callback<List<Po
         tv_main_rank_name.text = name + "님"
         tv_main_rank_like.text = poem.likeCount.toString()
 
-        tv_poem_title1.text = poem.wordFirst.substring(0, 1)
-        tv_poem_title2.text = poem.wordSecond.substring(0, 1)
-        tv_poem_title3.text = poem.wordThird.substring(0, 1)
-        tv_poem_content1.text = poem.wordFirst
-        tv_poem_content2.text = poem.wordSecond
-        tv_poem_content3.text = poem.wordThird
+        tv_rank_title1.text = poem.wordFirst.substring(0, 1)
+        tv_rank_title2.text = poem.wordSecond.substring(0, 1)
+        tv_rank_title3.text = poem.wordThird.substring(0, 1)
+        tv_rank_content1.text = poem.wordFirst
+        tv_rank_content2.text = poem.wordSecond
+        tv_rank_content3.text = poem.wordThird
     }
 
     private fun showNoItemMsg(isEmpty: Boolean) {
@@ -131,7 +131,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, Callback<List<Po
             if (!item.isLike) {
                 service.increaseLike(LikeRequest(item.id, manager.userId)).enqueue(object : Callback<BasicResponse> {
                     override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
-                        item.likeCount = ++likeCount
+                        item.likeCount = (likeCount + 1)
                         item.isLike = true
                         dialog.tv_poem_like.text = item.likeCount.toString()
                         dialog.ib_poem_like.setImageDrawable(filledHeart)
@@ -142,10 +142,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, Callback<List<Po
                     }
                 })
             } else {
-                toast("싫어요")
                 service.decreaseLike(LikeRequest(item.id, manager.userId)).enqueue(object : Callback<BasicResponse> {
                     override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
-                        item.likeCount = --likeCount
+                        item.likeCount = (likeCount - 1)
                         item.isLike = false
                         dialog.tv_poem_like.text = item.likeCount.toString()
                         dialog.ib_poem_like.setImageDrawable(heart)
@@ -231,12 +230,14 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, Callback<List<Po
 
     private fun getPrizedPoem(rank: Int) {
         if (selectedSortBtn == btn_main_favorite) {
-            setPoemToBoard(manager.userName, adapter.getItem(rank))
+            setPoemToBoard(adapter.getItem(rank).userName, adapter.getItem(rank))
         } else {
             service.getByLike(0, manager.userId).enqueue(object : Callback<List<Poem>> {
                 override fun onResponse(call: Call<List<Poem>>, response: Response<List<Poem>>) {
-                    if (response.body() != null)
-                        setPoemToBoard(manager.userName, (response.body())!![rank])
+                    if (response.body() != null) {
+                        val result = response.body()!!
+                        setPoemToBoard(result[rank].userName, result[rank])
+                    }
                 }
 
                 override fun onFailure(call: Call<List<Poem>>, t: Throwable) {
@@ -248,10 +249,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, Callback<List<Po
 
     override fun onResponse(call: Call<List<Poem>>, response: Response<List<Poem>>) {
         if (response.body() != null) {
-            poems.addAll(response.body()!!)
-            showNoItemMsg(poems.size == 0)
+            val result: ArrayList<Poem> = ArrayList(response.body()!!)
+            showNoItemMsg(result.isEmpty())
 
-            adapter.addPoems(poems)
+            adapter.addPoems(result)
             adapter.notifyDataSetChanged()
         }
         hideProgress()
